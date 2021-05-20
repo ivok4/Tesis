@@ -9,7 +9,7 @@ const Navbar = ({handleLogout}) => {
 
         <Container>
             <a href="./">
-            <img src="/assets/Logo.png"/>
+            <img src="/Assets/Logo.png"/>
             </a>
             <ul>
                 <li><a href="./login">Proyectos</a></li>
