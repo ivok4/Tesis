@@ -12,7 +12,7 @@ export const Container = styled.div`
 `
 export const Court = styled.div`
     display:flex;
-    background: url("/assets/Court-background2.png");
+    background: url("/Assets/Court-background2.png");
     width:100%;
     height:100%;
 
