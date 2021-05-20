@@ -9,7 +9,7 @@ background-color: #000;
 position:relative;
 
 img {
-    height:60%;
+    height:90%;
     position:absolute;
     display:inline;
 }

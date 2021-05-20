@@ -51,6 +51,12 @@ height:100%;
 justify-content:center;
 background-color:#FFF;
 align-items:center;
+a{
+  width:20%;
+  img{
+    width: 100%;
+  }
+}
 button{
     background-color: #FF6A00;
     width: 50%;
@@ -67,9 +73,7 @@ button{
       height:fit-content;
       width:52%;
     }
-    img{
-      width:20%;
-    }
+    
 @media(min-width: 468px) {
 }
   
