@@ -63,10 +63,7 @@ const clearErrors = () =>{
     authListener();
   }, [])
   
-  
-  
   return (
-    
     <>
        {user ? (
         <Layout handleLogout={handleLogout}>

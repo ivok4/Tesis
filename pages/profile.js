@@ -11,8 +11,4 @@ import {Grilla} from '../components';
 
 export default Profile;
 
-export async function getServerSideProps(ctx) {
-  const data = await getUserData(ctx);
-  return { props: data };
-}
 
