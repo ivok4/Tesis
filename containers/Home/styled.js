@@ -10,7 +10,7 @@ export const Container = styled.div`
   grid-template-rows: auto 1fr auto;
   div{
     display:flex;
-    background: url("/assets/Home-background-02.jpg"); 
+    background: url("/Assets/Home-background-02.jpg"); 
     width:100%;
     height:100%;
     background-size: 100%;
