@@ -1,4 +1,4 @@
-import {Layout, Grid} from '../containers'
+import {Layout} from '../containers'
 import {Grilla} from '../components'
 
 export default function Profile() {
