@@ -10,7 +10,7 @@ export default function Login() {
 //cambio de paginas  
 const router = useRouter()
 
-  const [user, setUser] = useState('');
+  const [iuser, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -65,7 +65,7 @@ const clearErrors = () =>{
   
   return (
     <>
-       {user ? (
+       {iuser ? (
         <Layout handleLogout={handleLogout}>
           <Grilla />
         </Layout>
