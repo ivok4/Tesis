@@ -12,8 +12,4 @@ function Home() {
 
 export default Home;
 
-export async function getServerSideProps(ctx) {
-  const data = await getUserData(ctx);
-  return { props: data };
-}
 
