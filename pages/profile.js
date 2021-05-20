@@ -15,6 +15,6 @@ export default Profile;
 
 export async function getServerSideProps(ctx) {
   const data = await getUserData(ctx);
-  return { props: data }; 
+  return { props: data };  
 }
  
