@@ -1,10 +1,12 @@
-import {Layout} from '../containers'
-import {Grilla} from '../components'
+import {Layout} from '../containers';
+import {Grilla} from '../components';
 
-export default function Profile() {
+ function Profile() {
   return (
     <Layout>
         <Grilla/>
     </Layout>
   )
 }
+
+export default Profile;
