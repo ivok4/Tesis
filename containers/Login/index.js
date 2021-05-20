@@ -17,7 +17,7 @@ const LoginContainer = (props) => {
     return(
         <Container>  
           <SideContainer>
-          <a href="/"><img src="/assets/Logo.png" alt="Logo guias inmersivas" /></a>
+          <a href="/"><img src="/Assets/Logo.png" alt="Logo guias inmersivas" /></a>
             <h1>Iniciar sesion</h1>
             <p>Necesitas una cuenta? <a href="#">Crea una cuenta</a></p>
             <FormLogin>
@@ -53,7 +53,7 @@ const LoginContainer = (props) => {
           <MainContainer>
             <h2>Analiza todas las jugadas de tu equipo</h2>
             <p>Empieza a crear tus analisis personales. Tanto de las jugadas de tu equipo como de los rivales.</p>
-            <img src="/assets/court-3d.png" alt="3d basketball court" />
+            <img src="/Assets/court-3d.png" alt="3d basketball court" />
           </MainContainer>
         </Container>
         

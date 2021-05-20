@@ -277,18 +277,18 @@ createRectangulo = () => {
             <div
             onClick={this.renderWidget.bind(this)}
             >
-              <img src="/assets/Player-icon.png" />
+              <img src="/Assets/Player-icon.png" />
             </div>
             <div
             onClick={this.createPlayer}
             >
-              <img src="/assets/Ball-icon.png" />
+              <img src="/Assets/Ball-icon.png" />
             </div>
             <div>
-              <img src="/assets/Line-icon.png" /> 
+              <img src="/Assets/Line-icon.png" /> 
             </div> 
             <div onClick={this.renderSquare.bind(this)}>
-              <img src="/assets/Shape-icon.png" />
+              <img src="/Assets/Shape-icon.png" />
             </div>
           </Sidebar> 
           <Court>
@@ -357,17 +357,17 @@ createRectangulo = () => {
             <div
             onClick={this.play}
             >
-              <img src="/assets/Play-icon.svg" />
+              <img src="/Assets/Play-icon.svg" />
             </div>
             <div>
               <p>2X</p>
             </div>
             <div>
-              <img src="/assets/FullScreen-icon.svg"/>
+              <img src="/Assets/FullScreen-icon.svg"/>
             </div>
             <div>
               {/*<p>1</p>
-               <img src="/assets/AnimPos-icon.svg"/> */}
+               <img src="/Assets/AnimPos-icon.svg"/> */}
                {/* {
               positions.map((Widget, i) => <p>1</p>)}  */}
             </div>
@@ -375,7 +375,7 @@ createRectangulo = () => {
               <p>Agregar posicion de la animación -- </p>
             </div>
             <div>
-              <img src="/assets/AddPos-icon.svg"
+              <img src="/Assets/AddPos-icon.svg"
               />
             </div>
           </AnimatorBar>

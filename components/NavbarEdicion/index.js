@@ -12,17 +12,17 @@ const NavbarEdicion = () => {
         <Container>
             <Navbar>
                 <div>
-                    <img src="/assets/Menu-icon.png" href='../index' />
-                    <img src="/assets/BackArrow.png" href='../index' />
+                    <img src="/Assets/Menu-icon.png" href='../index' />
+                    <img src="/Assets/BackArrow.png" href='../index' />
                     <h1>Tacticas</h1>
                 </div>
                 <div className="buttons">
                     <SectorNav>
-                    <img src="/assets/Share-icon.png" />
+                    <img src="/Assets/Share-icon.png" />
                     <p>Compartir</p>
                     </SectorNav>
                     <SectorNav>
-                    <img src="/assets/Save-icon.png"/>
+                    <img src="/Assets/Save-icon.png"/>
                     <p>Guardar</p>
                     </SectorNav>
 
