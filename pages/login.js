@@ -1,9 +1,8 @@
 import {Layout, Login as LoginContainer} from '../containers'
 import React, { useState, useEffect } from "react";
-//import firebase from '../lib/fire';
+import firebase from '../lib/fire';
 import { useRouter } from 'next/router'
 import {Grilla} from '../components'
-import firebase from '../lib/fire';
 
 
 
