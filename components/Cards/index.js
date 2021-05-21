@@ -41,7 +41,7 @@ const Cards = () =>{
               <Container key={i}> 
                 <div className="ProyectCard" id={i}>
                   <div>
-                    <img src="/assets/Ball-img.png" />
+                    <img src="/Assets/Ball-img.png" />
                     <h2>Nombre</h2>
                     <p>{play.name}</p>
                   </div>
