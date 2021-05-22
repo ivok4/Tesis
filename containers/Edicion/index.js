@@ -5,9 +5,6 @@ import Draggable from 'react-draggable';
 import { Canvas } from '../../components';
 import FreeTransform from 'react-free-transform'
 import { ReactVideo } from "reactjs-media";
-
-
-
 import {Container,
 Court,
 Sidebar,
@@ -21,10 +18,8 @@ const Widget = () => <Draggable
 id="0"
 handle=".handle"
 defaultPosition={{x: 0, y: 0}}
-//position={this.position}
 grid={[1, 1]}
 scale={1}
-//onStop={(event, data) => this.handleMovUpdate(1, event)}
 onStop={(event, data) => this.handleStop(1, event)}
 >
 <RedDot className="handle">
@@ -33,14 +28,7 @@ onStop={(event, data) => this.handleStop(1, event)}
 </Draggable> ;
 
  const SquareShape = () =>   <div class="resize both">Resize me!</div>
-
-
-
-
 class EdicionContainer extends React.Component {
-
-  
-
   constructor(props) {
     super(props);
     this.state = {
@@ -59,70 +47,9 @@ class EdicionContainer extends React.Component {
       positions: []
       };
   }  
-  //--------BASE DE OBTENER LAS POSICIONES DE LOS CIRCULOS--------------
-
-//    getTranslateValues () {
-//     console.log("probando: ");
-
-//     var name = document.getElementById("0");
-//     const style = window.getComputedStyle(name)
-//     const matrix = style['transform'] || style.webkitTransform || style.mozTransform
-  
-//     // No transform property. Simply return 0 values.
-//     if (matrix === 'none') {
-//       return {
-//         x: 0,
-//         y: 0,
-//         z: 0
-//       }
-//     }
-  
-//     // Can either be 2d or 3d transform
-//     const matrixType = matrix.includes('3d') ? '3d' : '2d'
-//     const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
-  
-//     // 2d matrices have 6 values
-//     // Last 2 values are X and Y.
-//     // 2d matrices does not have Z value.
-//     if (matrixType === '2d') {
-// //--------GUARDAR X E Y EN STATE-----------
-//       const newPos = {
-//         posx: Math.round(matrixValues[4]),
-//         posy: Math.round(matrixValues[5])
-//       }
-     
-//         this.setState({movimientos0: [...this.state.movimientos0, newPos]});
-       
-
-
-//       // return {
-//       //   x: matrixValues[4],
-//       //   y: matrixValues[5],
-//       //   z: 0
-//       // }
-//       console.log(this.state.movimientos0);
-//     }
-//     //console.log("transform values: " + x,y);
-
-//     // 3d matrices have 16 values
-//     // The 13th, 14th, and 15th values are X, Y, and Z
-//     // if (matrixType === '3d') {
-//     //   return {
-//     //     x: matrixValues[12],
-//     //     y: matrixValues[13],
-//     //     z: matrixValues[14]
-//     //   }
-//     // }
-//   }
-
-//--------FIN DE LA BASE DE OBTENER LAS POSICIONES DE LOS CIRCULOS--------------
-
   renderWidget() {
-    if(this.state.components.length < 5)     {
-    console.log("I was clicked");
-
+    if(this.state.components.length < 5){
     const newComponents = [...this.state.components, Widget];
-
     this.setState({
       components: newComponents
     });
@@ -133,17 +60,13 @@ class EdicionContainer extends React.Component {
 
   renderSquare() {
     console.log("Square was clicked");
-
     const newShapes = [...this.state.shapes, SquareShape];
-
     this.setState({
       shapes: newShapes
     });
-   console.log(this.state.shapes);
   }
 
   handlePositions() {
-
     //setInterval para la animacion
     const newPositions = [...this.state.positions];
 
@@ -154,8 +77,6 @@ class EdicionContainer extends React.Component {
   }
   handleStop(event, data) {
     console.log("handle stop data: "+ data)
-    //console.log(this.id)
-    //console.log(id +" pos: " + data.x + " ," + data.y);
   }
 
    handleMovUpdate = (move, event) => {
@@ -207,9 +128,8 @@ if (matrixType === '2d') {
             break;
     }  
   }
-    console.log(this.state.movimientos0);
-
 }
+
 //animacion de los jugadores
  play = () => {
   const intervaloMov = 3000;
@@ -259,9 +179,7 @@ this.state.movimientos4.forEach((movimiento,index) => {
 }
 //fin de la animacion de los jugadores
 
-
 //pasar la funcion del rectangulo
-
 createRectangulo = () => {
   const r1Info = { x: 20, y: 30, w: 100, h: 50 };
   const r1Style = { borderColor: 'red', borderWidth: 10 };
@@ -292,26 +210,21 @@ createRectangulo = () => {
             </div>
           </Sidebar> 
           <Court>
-            {/* {components.length !== 0 &&
-              components.map((Widget, i) => <Widget key={i} />)}  */}
               {components.length !== 0 &&
               components.map((Widget, i) => <Draggable 
               id="0"
               handle=".handle"
               defaultPosition={{x: 0, y: 0}}
-              //position={position}
               position={null} 
               grid={[1, 1]}
               scale={1} 
               onStop={(event, data) => this.handleMovUpdate(i, event)} 
-              //onStop={(event, data) => this.getTranslateValues(i, data)} 
               >
               <RedDot className="handle" id={i}>
                 <p>{i+1}</p>
               </RedDot>          
-            </Draggable>)}  
-             {/* {shapes.length !== 0 &&
-            shapes.map((SquareShape, i) => <Square id={i}/>)}   */}
+            </Draggable>
+            )}
             {shapes.length !== 0 &&
             shapes.map((SquareShape, i) => <Draggable 
             handle=".handle"
@@ -320,36 +233,7 @@ createRectangulo = () => {
               <Square id={i} className="handle">
                 <div className="tr-transform__scale-point--br"></div>
               </Square>
-            </Draggable>)}  
-            
-                  {/* base del draggable  
-                  <Draggable
-                  id="0"
-                  handle=".handle"
-                  defaultPosition={{x: 0, y: 0}}
-                  position={this.position}
-                  grid={[1, 1]}
-                  scale={1}
-                  onStop={(event, data) => this.handleMovUpdate(1, event)}
-                  >
-                  <RedDot className="handle"></RedDot>          
-                </Draggable>*/}
-{/* 
-<FreeTransform    
-    x={0}
-    y={0}
-    width={100}
-    height={100}
-    scaleX={1}
-    scaleY={1}
-    angle={0}
-    onUpdate={({x, y, scaleX, scaleY}) => {}}
-    classPrefix="tr"
-    disableScale={false}
- >
- </FreeTransform> */}
-
-            
+            </Draggable>)}
                 </Court>
           <div></div>
           <AnimatorBar>
@@ -375,14 +259,11 @@ createRectangulo = () => {
               <p>Agregar posicion de la animación -- </p>
             </div>
             <div>
-              <img src="/Assets/AddPos-icon.svg"
-              />
+              <img src="/Assets/AddPos-icon.svg"/>
             </div>
           </AnimatorBar>
         </Container>
-        
-      ) 
- 
+      )
    }
 }
 

@@ -50,8 +50,6 @@ const handleChangeGoals = (value) =>{
   setGoals(value);
 }
 
-
-
 //----------GET PLAYS FROM DATABSE-----------
 useEffect(() => {
       const fetchData = async () => {
@@ -125,14 +123,15 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
     console.log(videoFile);
     onSubmit();
   });
-
-  //onSubmit();
   }
-
+//console.log(proyects.plays.length);
 
 const onSubmit = () =>{
+  var PlayID = proyects.plays.length;
+  setPlayID(PlayID) ;
+  console.log(PlayID);
   //hace push de la jugada
-firebase.database().ref('/users/0/' + userId +'/plays/'+ playID).set({  //actualiza la data.   
+ firebase.database().ref('/users/0/' + userId +'/plays/'+PlayID).set({  //actualiza la data.  
   name: name,
   category: category,
   participantes : participantes,
@@ -140,8 +139,6 @@ firebase.database().ref('/users/0/' + userId +'/plays/'+ playID).set({  //actual
   goals: goals,
   videoFile: videoFile
   });
-  var PlayID = playID + 1;
-  setPlayID(PlayID) ;
   resetForm();
   window.location.replace("http://localhost:3000/ediciones/"); //go to edicion page
 }

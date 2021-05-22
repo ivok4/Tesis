@@ -2,9 +2,6 @@ import { Container } from './styled'
 import React, { useState, useEffect } from "react";
 import firebase from '../../lib/fire';
 
-
-  
-
 const Cards = () =>{
   
   const [proyects, setProyects] = useState([]);
