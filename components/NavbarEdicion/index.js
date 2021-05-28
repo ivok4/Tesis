@@ -13,7 +13,7 @@ const NavbarEdicion = () => {
             <Navbar>
                 <div>
                     <img src="/Assets/Menu-icon.png" href='../index' />
-                    <img src="/Assets/BackArrow.png" href='../index' />
+                    <a href="/login"><img src="/Assets/BackArrow.png" href='../index' /></a>
                     <h1>Tacticas</h1>
                 </div>
                 <div className="buttons">

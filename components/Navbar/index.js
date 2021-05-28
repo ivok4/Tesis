@@ -6,10 +6,9 @@ import {Container} from './styled';
 
 const Navbar = ({handleLogout}) => {
     return(
-
         <Container>
             <a href="./">
-            <img src="/Assets/Logo.png"/>
+                <img src="/Assets/Logo.png"/>
             </a>
             <ul>
                 <li><a href="./login">Proyectos</a></li>

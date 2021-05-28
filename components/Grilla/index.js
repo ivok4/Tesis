@@ -50,7 +50,7 @@ const handleChangeGoals = (value) =>{
   setGoals(value);
 }
 
-//----------GET PLAYS FROM DATABSE-----------
+//----------GET PROYECTS FROM DATABSE-----------
 useEffect(() => {
       const fetchData = async () => {
           try {
@@ -120,7 +120,6 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       //console.log('File available at', downloadURL);
       setVideoFile(downloadURL);
     });
-    console.log(videoFile);
     onSubmit();
   });
   }
@@ -129,7 +128,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
 const onSubmit = () =>{
   var PlayID = proyects.plays.length;
   setPlayID(PlayID) ;
-  console.log(PlayID);
+  //console.log(PlayID);
   //hace push de la jugada
  firebase.database().ref('/users/0/' + userId +'/plays/'+PlayID).set({  //actualiza la data.  
   name: name,
@@ -140,7 +139,7 @@ const onSubmit = () =>{
   videoFile: videoFile
   });
   resetForm();
-  window.location.replace("http://localhost:3000/ediciones/"); //go to edicion page
+  window.location.replace(`http://localhost:3000/editions/${PlayID}`); //go to edicion page
 }
 //reseta los valores del state del formulario
 function resetForm() {
@@ -152,7 +151,12 @@ function resetForm() {
   setGoals('');
 }
   
-    return(
+    return(<>
+      {!proyects.plays ? (
+       <Container>
+         crear la pagina que no contiene proyectos realizados
+       </Container>
+     ): ( 
         <Container>  
           <CreateProyectPopUp className={isActive === 'true' ? "active" : "unactive"}>
               <div className="BlackBackground"/>
@@ -207,11 +211,10 @@ function resetForm() {
                 <p>Proyecto nuevo</p>
              </div>
             <Cards/> 
-            <h1 className="titulo">Proyectos</h1>
-            <Cards/>
           </Grid>
-
         </Container>
+        )} 
+        </>
         
     )
 }

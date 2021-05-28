@@ -28,6 +28,8 @@ onStop={(event, data) => this.handleStop(1, event)}
 </Draggable> ;
 
  const SquareShape = () =>   <div class="resize both">Resize me!</div>
+
+
 class EdicionContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +49,7 @@ class EdicionContainer extends React.Component {
       positions: []
       };
   }  
+  
   renderWidget() {
     if(this.state.components.length < 5){
     const newComponents = [...this.state.components, Widget];
@@ -188,7 +191,8 @@ createRectangulo = () => {
 
    render(){
     const { components, shapes} = this.state;
-
+    const data = this.props.data;
+    console.log(data);
     return(
         <Container>
           <Sidebar>

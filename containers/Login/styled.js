@@ -5,7 +5,7 @@ export const Container = styled.div`
     display:grid;
     background-color: #000000;
     grid-template-columns: repeat(1, 3fr);
-    height: 100vh;
+    height: 90vh;
     width:100%;
     @media (min-width: 1024px) {
     display:flex;

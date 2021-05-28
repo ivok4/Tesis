@@ -7,9 +7,6 @@ import {Grilla} from '../components'
 
 
 export default function Login() {
-//cambio de paginas  
-const router = useRouter()
-
   const [iuser, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

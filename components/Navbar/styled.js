@@ -1,21 +1,15 @@
 import styled from 'styled-components'
 
 const Container = styled.nav`
-height:5vh;
+height: 9vh;
 width:1382px;
 padding:1% 2%;
-margin-bottom: 2%;
 background-color: #000;
-position:relative;
-
-img {
-    height:90%;
-    position:absolute;
-    display:inline;
-}
+display: flex;
+justify-content: space-between;
+align-items: center;
 ul{
- 
-    margin:2% 5%;;
+    margin:0;
     padding: 0 2%;
     display:inline;
 }
@@ -46,14 +40,17 @@ input[type=text] {
     margin-top:1%;
     margin-left:30%;
   }
-  h2{
-    width:20%;
-    background-color:#FFF;
-}
-  h2.img{
-      width:20%;
-      background-color:#FFF;
-  }
+  button{
+        background-color:#000;
+        border-radius:10px;
+        border-color:#FF6A00;
+        color: #FFF;
+        height:100%;
+        width:10%;
+    }
+    img{
+        width: 20%;
+    }
   
 `
 

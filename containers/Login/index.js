@@ -19,7 +19,7 @@ const LoginContainer = (props) => {
           <SideContainer>
           <a href="/"><img src="/Assets/Logo.png" alt="Logo guias inmersivas" /></a>
             <h1>Iniciar sesion</h1>
-            <p>Necesitas una cuenta? <a href="#">Crea una cuenta</a></p>
+            <p>Necesitas una cuenta? <a href="/register"><strong>Crea una cuenta</strong></a></p>
             <FormLogin>
               <div>
                 <input
