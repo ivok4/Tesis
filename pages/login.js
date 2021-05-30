@@ -4,8 +4,6 @@ import firebase from '../lib/fire';
 import { useRouter } from 'next/router'
 import {Grilla} from '../components'
 
-
-
 export default function Login() {
   const [iuser, setUser] = useState('');
   const [email, setEmail] = useState('');

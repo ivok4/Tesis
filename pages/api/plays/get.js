@@ -1,13 +1,15 @@
 //GET user informstion.
 import fire from '../../../lib/fire';
 const firebaseDB = fire.database();
-
 //var userId = fire.auth().currentUser.uid;
+
+//console.log(userId);
 
 export default async (req, res) => {
     try {
         firebaseDB.ref('users/0' + userId).once('value', (snapshot) => {
             const questionsArr = [];
+            console.log(userId);
             snapshot.forEach((childSnapshot) => {
                 questionsArr.push({
                     id: childSnapshot.key,
@@ -24,7 +26,6 @@ export default async (req, res) => {
             error: error.message
         });
     }
-
 };
 
 //GET videos by Slug
@@ -52,6 +53,25 @@ export const getCollectionBySlug = async () => {
 };
 
 //FIN PERSONALIZADA
+
+
+//prueba 
+
+export const dataBySlugIvo = async (slug, res) => {
+    const dbRef = firebase.database().ref();
+dbRef.child("users").child(userId).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+};
+//fin prueba
+
+
 
 
 //PRUEBA 2

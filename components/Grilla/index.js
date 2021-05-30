@@ -65,6 +65,7 @@ useEffect(() => {
           }
       };
       fetchData();
+      
   }, []);
 //--------END PLAYS FROM DATA BASE-----------
 
