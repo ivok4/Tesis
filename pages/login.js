@@ -24,7 +24,7 @@ const clearErrors = () =>{
   const handleLogin = () =>{
     clearErrors();
     firebase
-      .auth()
+      .auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       .signInWithEmailAndPassword(email, password)
       .catch(err => {
         switch(err.code){
@@ -39,6 +39,9 @@ const clearErrors = () =>{
         }
       })
   }
+
+
+   
   const handleLogout = () =>{
     console.log("log out");
     firebase.auth().signOut();

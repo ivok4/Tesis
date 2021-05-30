@@ -191,8 +191,7 @@ createRectangulo = () => {
 
    render(){
     const { components, shapes} = this.state;
-    const data = this.props.data;
-    console.log(data);
+    const jugada = this.props.jugada;
     return(
         <Container>
           <Sidebar>
@@ -238,6 +237,7 @@ createRectangulo = () => {
                 <div className="tr-transform__scale-point--br"></div>
               </Square>
             </Draggable>)}
+            <p>{jugada.name}</p>
                 </Court>
           <div></div>
           <AnimatorBar>

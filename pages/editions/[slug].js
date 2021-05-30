@@ -1,55 +1,56 @@
 import React, { useState, useEffect } from "react";
 import {LayoutEdicion, Edicion as EdicionContainer} from '../../containers'
 import firebase from '../../lib/fire';
+import Axios from 'axios';
 
-export default function Editions({data}) {
+
+
+
+export default function Editions({slug}) {
   const [jugada, setJugada] = useState([]);
-  const [usuario, setUserId] = useState('');
-  let PlayId = data;
-  console.log(usuario.uid);
+  const [usuario, setUserId] = useState();
+  let playId = slug;
 
   const authListener = () =>{
     firebase.auth().onAuthStateChanged(user => {
-      if(user){       
+      if(user){
+        getCollectionBySlug(user);
         setUserId(user.uid);
       }
       else{
-        setUserId('');     
+        setUser('');        
       }
     })
   }
-
-  const fetchData = async () => {
-    try {
-          const { data } = await firebase.database().ref(`users/0/${usuario}/plays/${PlayId}`).once('value').then((snapshot) => {
-          var username = (snapshot.val())|| 'Anonymous';               
-          console.log(username);
-          setJugada(username);
-        }); 
-    } catch (error) {
-        console.error("este es mi error", error);
-    }
-};
-
   useEffect(() => {
-    console.log("imprimir usuairo" + usuario);
     authListener();
-    fetchData();
-}, []);
+  }, [])
+  
 
-//console.log(jugada);
-
+ const getCollectionBySlug = async (userId) => {
+   if(userId){
+    console.log(userId.uid);
+    try {
+      const { data } = await firebase.database().ref(`/users/0/${userId.uid}/plays/${playId}`).once('value').then((snapshot) => {
+        var username = (snapshot.val())|| 'Anonymous';               
+        setJugada(username);
+      }); 
+    } catch (error) {
+      console.error(error);
+    }
+   }
+  };
   return (
     <LayoutEdicion>
-         {/* <EdicionContainer data={data}/>  */}
-         <p>{jugada.name}</p>
+         <EdicionContainer jugada={jugada}/>  
     </LayoutEdicion>
   )
 }
+
 export async function getServerSideProps({ res, params }) {
   const { slug } = params;
   const data = slug;
-  return { props: {data} }
+  return { props: {slug} }
 }
 
 
