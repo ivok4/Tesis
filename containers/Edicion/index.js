@@ -134,7 +134,7 @@ if (matrixType === '2d') {
 
 //animacion de los jugadores
  play = () => {
-  const intervaloMov = 3000;
+  const intervaloMov = 1000;
   console.log('--------Play mode!-------')
   var player0 = document.getElementById("0");
   var player1 = document.getElementById("1");
@@ -146,7 +146,8 @@ if (matrixType === '2d') {
   this.state.movimientos0.forEach((movimiento,index) => {
       setTimeout(() => {
           console.log("0 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
-          player0.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+          player0.style.transition= "transform 0.5s linear";
+           player0.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
         }, intervaloMov * (index + 1));
   });
   console.log('------Movimientos: ----' + this.state.styleMovimientos0); 
@@ -154,27 +155,32 @@ if (matrixType === '2d') {
   this.state.movimientos1.forEach((movimiento,index) => {
     setTimeout(() => {
         console.log("1 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+        player1.style.transition= "transform 0.5s linear";
         player1.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
       }, intervaloMov * (index + 1));
 });
 
 console.log('------Movimientos: ----' + this.state.styleMovimientos1); 
 
+
 this.state.movimientos2.forEach((movimiento,index) => {
   setTimeout(() => {
       console.log("2 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      player2.style.transition= "transform 0.5s linear";
       player2.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
     }, intervaloMov * (index + 1));
 });
 this.state.movimientos3.forEach((movimiento,index) => {
   setTimeout(() => {
       console.log("3 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      player3.style.transition= "transform 0.5s linear";
       player3.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
     }, intervaloMov * (index + 1));
 });
 this.state.movimientos4.forEach((movimiento,index) => {
   setTimeout(() => {
       console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      player4.style.transition= "transform 0.5s linear";
       player4.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
     }, intervaloMov * (index + 1));
 });  
@@ -191,11 +197,8 @@ createRectangulo = () => {
    render(){
     const { components, shapes} = this.state;
     const jugada = this.props.jugada;
-
-    const videStyle = {
-      backgroundImage: "url(Assets/Backgorund-vide.jpg)" ,
-    };
     return(
+      
         <Container>
           <Sidebar>
             <div

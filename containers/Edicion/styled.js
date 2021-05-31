@@ -127,6 +127,9 @@ export const RedDot = styled.div`
     width:50px;
     border-radius:50px;
     background-color:#C4342C;
+    color:#FFF;
+    font-size: 20px;
+    text-align: center;
 `
 export const AnimatorBar = styled.div`
     height:100%;
