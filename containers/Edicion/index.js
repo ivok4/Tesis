@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 import { Canvas } from '../../components';
 import FreeTransform from 'react-free-transform'
-import { ReactVideo } from "reactjs-media";
 import {Container,
 Court,
 Sidebar,
@@ -192,6 +191,10 @@ createRectangulo = () => {
    render(){
     const { components, shapes} = this.state;
     const jugada = this.props.jugada;
+
+    const videStyle = {
+      backgroundImage: "url(Assets/Backgorund-vide.jpg)" ,
+    };
     return(
         <Container>
           <Sidebar>
@@ -236,9 +239,20 @@ createRectangulo = () => {
               <Square id={i} className="handle">
                 <div className="tr-transform__scale-point--br"></div>
               </Square>
-            </Draggable>)}
-            <p>{jugada.name}</p>
+            </Draggable>)}  
                 </Court>
+                <>
+                {jugada ? (
+              <video width="100%" height="100%" 
+                controls
+                >
+                <source src="https://firebasestorage.googleapis.com/v0/b/tesis-37b65.appspot.com/o/prueba-video.mp4?alt=media&token=56b71219-bd57-4de4-92ac-42a3d0a6bc23" type="video/mp4" />
+              </video> 
+           
+              ): ( 
+                <p>no hay jugadas</p>
+                )}     
+              </>
           <div></div>
           <AnimatorBar>
             <p>Controles</p>

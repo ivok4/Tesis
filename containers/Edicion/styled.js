@@ -2,17 +2,21 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 0.2fr 3.8fr;
+  grid-template-columns: 0.2fr 3.8fr 1.5fr;
   grid-template-rows: 1.9fr 0.1fr;
   gap: 0px 0px;
   grid-template-areas:
     ". ."
     ". .";
+    video{
+        background: url("/Assets/Backgorund-vide.jpg");
+    }
 
 `
 export const Court = styled.div`
     display:flex;
     background: url("/Assets/Court-background2.png");
+    background-size: cover;
     width:100%;
     height:100%;
 

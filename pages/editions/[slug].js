@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {LayoutEdicion, Edicion as EdicionContainer} from '../../containers'
 import firebase from '../../lib/fire';
-import Axios from 'axios';
-
 
 
 
@@ -29,7 +27,7 @@ export default function Editions({slug}) {
 
  const getCollectionBySlug = async (userId) => {
    if(userId){
-    console.log(userId.uid);
+    //console.log(userId.uid);
     try {
       const { data } = await firebase.database().ref(`/users/0/${userId.uid}/plays/${playId}`).once('value').then((snapshot) => {
         var username = (snapshot.val())|| 'Anonymous';               

@@ -65,7 +65,6 @@ useEffect(() => {
           }
       };
       fetchData();
-      
   }, []);
 //--------END PLAYS FROM DATA BASE-----------
 
@@ -121,6 +120,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       //console.log('File available at', downloadURL);
       setVideoFile(downloadURL);
     });
+    console.log(videoFile);
     onSubmit();
   });
   }
@@ -131,17 +131,18 @@ const onSubmit = () =>{
   setPlayID(PlayID) ;
   //console.log(PlayID);
   //hace push de la jugada
- firebase.database().ref('/users/0/' + userId +'/plays/'+PlayID).set({  //actualiza la data.  
-  name: name,
-  category: category,
-  participantes : participantes,
-  description: description,
-  goals: goals,
-  videoFile: videoFile
-  });
-  resetForm();
-  window.location.replace(`http://localhost:3000/editions/${PlayID}`); //go to edicion page
-}
+    firebase.database().ref(`/users/0/${userId}/plays/${PlayID}`).set({  //actualiza la data.  
+      name: name,
+      category: category,
+      participantes : participantes,
+      description: description,
+      goals: goals,
+      videoFile: videoFile
+      });
+      resetForm();
+      window.location.replace(`http://localhost:3000/editions/${PlayID}`); //go to edicion page
+  }
+
 //reseta los valores del state del formulario
 function resetForm() {
   setShowPopUp('false');
