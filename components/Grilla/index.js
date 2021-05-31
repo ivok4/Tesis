@@ -140,7 +140,7 @@ const onSubmit = () =>{
       videoFile: videoFile
       });
       resetForm();
-      window.location.replace(`http://localhost:3000/editions/${PlayID}`); //go to edicion page
+      window.location.replace(`/editions/${PlayID}`); //go to edicion page
   }
 
 //reseta los valores del state del formulario
