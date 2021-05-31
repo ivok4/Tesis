@@ -24,7 +24,7 @@ const clearErrors = () =>{
   const handleLogin = () =>{
     clearErrors();
     firebase
-      .auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .auth()
       .signInWithEmailAndPassword(email, password)
       .catch(err => {
         switch(err.code){
