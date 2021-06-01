@@ -7,9 +7,7 @@ import { ContainerBody } from './styled';
 function LayoutEdicion({ children }) {
   return (
     <ContainerBody>
-      <NavbarEdicion />
       {children}
-       {/* <Footer /> */}
     </ContainerBody>
   );
 }

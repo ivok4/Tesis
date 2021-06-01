@@ -6,9 +6,19 @@ import {Container,
 
 
 const NavbarEdicion = () => {
+    const newPos = [
+        { posx:200,
+        posy:100,
+        },
+        { posx:300,
+            posy:200,
+        },
+    ]
+       
+      
 
+   
     return(
-
         <Container>
             <Navbar>
                 <div>
@@ -21,11 +31,10 @@ const NavbarEdicion = () => {
                     <img src="/Assets/Share-icon.png" />
                     <p>Compartir</p>
                     </SectorNav>
-                    <SectorNav>
-                    <img src="/Assets/Save-icon.png"/>
-                    <p>Guardar</p>
+                    <SectorNav onClick={handleSaveClck}>
+                        <img src="/Assets/Save-icon.png"/>
+                        <p>Guardar</p>
                     </SectorNav>
-
                 </div>
             </Navbar>
         </Container>

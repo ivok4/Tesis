@@ -9,7 +9,9 @@ Court,
 Sidebar,
 RedDot,
 AnimatorBar,
-Square
+Square,
+Navbar,
+SectorNav
 } from './styled'
 
 
@@ -193,13 +195,43 @@ createRectangulo = () => {
   const r1Style = { borderColor: 'red', borderWidth: 10 };
  drawRect(r1Info, r1Style);
 }
+ handleSaveClck = () => {
+  const savePlay = [
+    this.state.movimientos0,
+    this.state.movimientos1,
+    this.state.movimientos2,
+    this.state.movimientos3,
+    this.state.movimientos4
+  ]
+  console.log(savePlay);
+  //---------HACER PUSH DE LA JUGADA A FIREBASE-----------------
+}
 
    render(){
     const { components, shapes} = this.state;
     const jugada = this.props.jugada;
     return(
-      
+      <>
+      <Navbar>
+                <div>
+                    <img src="/Assets/Menu-icon.png" href='../index' />
+                    <a href="/login"><img src="/Assets/BackArrow.png" href='../index' /></a>
+                    <h1>Tacticas</h1>
+                </div>
+                <div className="buttons">
+                    <SectorNav>
+                    <img src="/Assets/Share-icon.png" />
+                    <p>Compartir</p>
+                    </SectorNav>
+                    <SectorNav onClick={this.handleSaveClck}>
+                        <img src="/Assets/Save-icon.png"/>
+                        <p>Guardar</p>
+                    </SectorNav>
+                </div>
+            </Navbar>
+     
         <Container>
+          
           <Sidebar>
             <div
             onClick={this.renderWidget.bind(this)}
@@ -284,6 +316,7 @@ createRectangulo = () => {
             </div>
           </AnimatorBar>
         </Container>
+        </>
       )
    }
 }

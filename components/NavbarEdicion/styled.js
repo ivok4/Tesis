@@ -46,6 +46,10 @@ export const SectorNav = styled.div`
     display:flex;
     flex-direction:row;
     width:20%;
+    a{
+        width: 100%;
+        height: 100%;
+    }
     p{
             width:auto;
             height:fit-content;
