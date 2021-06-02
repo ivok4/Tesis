@@ -117,7 +117,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
   }, function() {
     // Upload completed successfully, now we can get the download URL
     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-      //console.log('File available at', downloadURL);
+      console.log('File available at', downloadURL);
       setVideoFile(downloadURL);
     });
     console.log(videoFile);
