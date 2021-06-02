@@ -210,6 +210,7 @@ createRectangulo = () => {
    render(){
     const { components, shapes} = this.state;
     const jugada = this.props.jugada;
+    console.log(jugada);
     return(
       <>
       <Navbar>
@@ -281,7 +282,7 @@ createRectangulo = () => {
               <video width="100%" height="100%" 
                 controls
                 >
-                <source src="https://firebasestorage.googleapis.com/v0/b/tesis-37b65.appspot.com/o/prueba-video.mp4?alt=media&token=56b71219-bd57-4de4-92ac-42a3d0a6bc23" type="video/mp4" />
+                <source src={jugada.videoFile} type="video/mp4" />
               </video> 
            
               ): ( 
