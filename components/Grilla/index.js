@@ -98,6 +98,9 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         console.log('Upload is running');
         break;
     }
+    if(progress === 100){
+      onSubmit();
+    }
   }, function(error) {
     // A full list of error codes is available at
     // https://firebase.google.com/docs/storage/web/handle-errors
@@ -121,7 +124,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       setVideoFile(downloadURL);
     });
     console.log(videoFile);
-    onSubmit();
+    //onSubmit();
   });
   }
 //console.log(proyects.plays.length);
@@ -152,8 +155,8 @@ function resetForm() {
   setDescription('');
   setGoals('');
 }
-  
-    return(<>
+
+     return(<>
       {!proyects.plays ? (
        <Container>
          crear la pagina que no contiene proyectos realizados
