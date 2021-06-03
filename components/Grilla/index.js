@@ -126,9 +126,11 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       goals: goals,
         videoFile: downloadURL,
         });    
+      resetForm();
+      window.location.replace(`/editions/${PlayID}`); //go to edicion page
       });
   });
-    onSubmit();
+    //onSubmit();
     }
 //console.log(proyects.plays.length);
 
