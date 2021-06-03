@@ -5,7 +5,6 @@ import {Container,
   CreateProyectPopUp
 } from './styled'
 import { Cards } from '../../components';
-import axios from 'axios';
 import firebase from '../../lib/fire';
   
 const Grilla = () => {
@@ -16,7 +15,7 @@ const Grilla = () => {
   const [participantes, setParticipantes] = useState('');
   const [description, setDescription] = useState('');
   const [goals, setGoals] = useState('');
-  const [videoFile, setVideoFile] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [proyects, setProyects] = useState([]);
   const [playID, setPlayID] = useState(0);
@@ -98,9 +97,6 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         console.log('Upload is running');
         break;
     }
-    if(progress === 100){
-      onSubmit();
-    }
   }, function(error) {
     // A full list of error codes is available at
     // https://firebase.google.com/docs/storage/web/handle-errors
@@ -117,14 +113,22 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         // Unknown error occurred, inspect error.serverResponse
         break;
     }
-  }, function() {
+  },  function() {
     // Upload completed successfully, now we can get the download URL
+    var PlayID = proyects.plays.length;
     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
       console.log('File available at', downloadURL);
-      setVideoFile(downloadURL);
-    });
-    console.log(videoFile);
+      firebase.database().ref(`/users/0/${userId}/plays/${PlayID}`).set({  //actualiza la data.  
+        name: name,
+      category: category,
+      participantes : participantes,
+      description: description,
+      goals: goals,
+        videoFile: downloadURL,
+        });    
+      });
   });
+  onSubmit();
   }
 //console.log(proyects.plays.length);
 
@@ -139,12 +143,9 @@ const onSubmit = () =>{
       participantes : participantes,
       description: description,
       goals: goals,
-      videoFile: videoFile
+      videoFile: videoUrl,
       });
       resetForm();
-      setTimeout(() => {
-        window.location.replace(`/editions/${PlayID}`); //go to edicion page
-      }, 3000);
       //window.location.replace(`/editions/${PlayID}`); //go to edicion page
   }
 
@@ -156,6 +157,7 @@ function resetForm() {
   setParticipantes('');
   setDescription('');
   setGoals('');
+  setVideoUrl('');
 }
 
      return(<>
