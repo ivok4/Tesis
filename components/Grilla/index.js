@@ -128,7 +128,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         });    
       });
   });
-      window.location.replace(`/editions/${PlayID}`); //go to edicion page
+    onSubmit();
     }
 //console.log(proyects.plays.length);
 
@@ -146,7 +146,7 @@ const onSubmit = () =>{
       videoFile: videoUrl,
       });
       resetForm();
-      //window.location.replace(`/editions/${PlayID}`); //go to edicion page
+      window.location.replace(`/editions/${PlayID}`); //go to edicion page
   }
 
 //reseta los valores del state del formulario
