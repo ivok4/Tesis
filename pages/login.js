@@ -39,8 +39,6 @@ const clearErrors = () =>{
         }
       })
   }
-
-
    
   const handleLogout = () =>{
     console.log("log out");

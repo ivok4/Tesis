@@ -232,7 +232,6 @@ createRectangulo = () => {
             </Navbar>
      
         <Container>
-          
           <Sidebar>
             <div
             onClick={this.renderWidget.bind(this)}
@@ -253,7 +252,7 @@ createRectangulo = () => {
           </Sidebar> 
           <Court>
               {components.length !== 0 &&
-              components.map((Widget, i) => <Draggable 
+              components.map((Widget, i) => <Draggable
               id="0"
               handle=".handle"
               defaultPosition={{x: 0, y: 0}}
@@ -286,7 +285,7 @@ createRectangulo = () => {
               </video> 
            
               ): ( 
-                <p>no hay jugadas</p>
+                <p>no hay video</p>
                 )}     
               </>
           <div></div>

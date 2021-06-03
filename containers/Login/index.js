@@ -14,6 +14,14 @@ const LoginContainer = (props) => {
   emailError,
   passwordError,
   } = props;
+
+
+  const handleLoginEnter = (e) =>{
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  }
+
     return(
         <Container>  
           <SideContainer>
@@ -45,7 +53,7 @@ const LoginContainer = (props) => {
                 />
                   <p>{passwordError}</p>
               </div>
-            <button onClick={handleLogin}>
+            <button onClick={handleLogin} onKeyDown={handleLoginEnter}>
               <a href="#"> INICIAR SESION</a>
             </button>            
             </FormLogin>
