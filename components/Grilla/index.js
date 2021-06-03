@@ -128,8 +128,8 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
         });    
       });
   });
-  onSubmit();
-  }
+      window.location.replace(`/editions/${PlayID}`); //go to edicion page
+    }
 //console.log(proyects.plays.length);
 
 const onSubmit = () =>{
