@@ -281,7 +281,8 @@ createRectangulo = () => {
               <video width="100%" height="100%" 
                 controls
                 >
-                <source src={jugada.videoFile} type="video/mp4" />
+                {/* <source src={jugada.videoFile} type="video/mp4" /> */}
+                <iframe width="420" height="345" src={jugada.videoFile} ></iframe>
               </video> 
            
               ): ( 
