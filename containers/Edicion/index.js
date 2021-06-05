@@ -281,8 +281,7 @@ createRectangulo = () => {
               <video width="100%" height="100%" 
                 controls
                 >
-                {/* <source src={jugada.videoFile} type="video/mp4" /> */}
-                <source src="https://firebasestorage.googleapis.com/v0/b/tesis-37b65.appspot.com/o/hola.mp4?alt=media&token=70809fd7-f747-4c8c-9d15-c65261823291" type="video/mp4" />
+                <source src={jugada.videoFile} type="video/mp4" />
               </video> 
            
               ): ( 
