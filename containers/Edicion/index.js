@@ -285,7 +285,7 @@ createRectangulo = () => {
               //   <source width="100%" height="100%" src='https://www.youtube.com/watch?v=ysz5S6PUM-U' type="video/mp4" />                
               // </video> 
               
-                <ReactPlayer url={jugada.videoFile} />
+                <ReactPlayer url={jugada.videoFile} playing={true} controls={true}  width='100%' height='100%'/>
               ): ( 
                 <p>no hay video</p>
                 )}     
