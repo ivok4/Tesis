@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 import { Canvas } from '../../components';
 import FreeTransform from 'react-free-transform'
+import ReactPlayer from 'react-player'
 import {Container,
 Court,
 Sidebar,
@@ -278,13 +279,13 @@ createRectangulo = () => {
                 </Court>
                 <>
                 {jugada ? (
-              <video width="100%" height="100%" 
-                controls
-                >
-                <source width="100%" height="100%" src={jugada.videoFile} type="video/mp4" />
-              </video> 
+              // <video width="100%" height="100%" 
+              //   controls
+              //   >
+              //   <source width="100%" height="100%" src='https://www.youtube.com/watch?v=ysz5S6PUM-U' type="video/mp4" />                
+              // </video> 
               
-           
+                <ReactPlayer url={jugada.videoFile} />
               ): ( 
                 <p>no hay video</p>
                 )}     
