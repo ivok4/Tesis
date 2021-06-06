@@ -32,7 +32,7 @@ onStop={(event, data) => this.handleStop(1, event)}
  const SquareShape = () =>   <div class="resize both">Resize me!</div>
 
 
-class EdicionContainer extends React.Component {
+class EdicionTestContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +48,8 @@ class EdicionContainer extends React.Component {
       styleMovimientos4: [],
       components: [],
       shapes: [],
-      positions: []
+      positions: [],
+      canvasState: "false",
       };
   }  
   
@@ -204,53 +205,37 @@ createRectangulo = () => {
 //PRUBAS DE GRABACION DE VIDEO
 
  startRecording() {
-  // const chunks = []; // here we will store our recorded media chunks (Blobs)
-  // const stream = canvas.captureStream(); // grab our canvas MediaStream
-  // const rec = new MediaRecorder(stream); // init the recorder
-  // // every time the recorder has new data, we will store it in our array
-  // rec.ondataavailable = e => chunks.push(e.data);
-  // // only when the recorder stops, we construct a complete Blob from all the chunks
-  // rec.onstop = e => exportVid(new Blob(chunks, {type: 'video/webm'}));
+  const chunks = []; // here we will store our recorded media chunks (Blobs)
+  const stream = canvas.captureStream(); // grab our canvas MediaStream
+  const rec = new MediaRecorder(stream); // init the recorder
+  // every time the recorder has new data, we will store it in our array
+  rec.ondataavailable = e => chunks.push(e.data);
+  // only when the recorder stops, we construct a complete Blob from all the chunks
+  rec.onstop = e => this.exportVid(new Blob(chunks, {type: 'video/mp4'})); 
   
-  // rec.start();
-  // setTimeout(()=>rec.stop(), 3000); // stop recording in 3s
-
-  console.log("hoa");
-
-  if (navigator.mediaDevices.getUserMedia) {
-    console.log("hola1");
-    var constraints = { audio: true, video: true };
-    var chunks = [];
-  
-    var onSuccess = function(stream) {
-      var options = {
-        audioBitsPerSecond : 128000,
-        videoBitsPerSecond : 2500000,
-        mimeType : 'video/mp4'
-      }
-      var mediaRecorder = new MediaRecorder(stream,options);
-      m = mediaRecorder;
-//  ...
-      console.log("hola2");
-    }
-  }
-
+  rec.start();
+  setTimeout(()=>rec.stop(), 3000); // stop recording in 3s
 }
 
  exportVid(blob) {
-  const vid = document.createElement('video');
-  vid.src = URL.createObjectURL(blob);
-  vid.controls = true;
-  document.body.appendChild(vid);
-  const a = document.createElement('a');
-  a.download = 'myvid.webm';
-  a.href = vid.src;
-  a.textContent = 'download the video';
-  document.body.appendChild(a);
+   console.log(URL.createObjectURL(blob));
+  // const vid = document.createElement('video');
+  // vid.src = URL.createObjectURL(blob);
+  // vid.controls = true;
+  // document.body.appendChild(vid);
+  // const a = document.createElement('a');
+  // a.download = 'myvid.mp4';
+  // a.href = vid.src;
+  // a.textContent = 'download the video';
+  // document.body.appendChild(a);
 }
 recordAnimation = () => {
+  var canvas =  document.createElement("canvas");
+  document.getElementById("court").appendChild(canvas);
+  canvas.setAttribute('id','canvas')
   this.play();
   this.startRecording();
+  //$(div).remove();
 }
 
 //FIN DE PRUEBAS DE GRABACION DE VIDEO
@@ -335,9 +320,8 @@ recordAnimation = () => {
             <div onClick={this.renderSquare.bind(this)}>
               <img src="/Assets/Shape-icon.png" />
             </div>
-          </Sidebar> 
-         
-          <Court>
+          </Sidebar>           
+          <Court id="court">
               {components.length !== 0 &&
               components.map((Widget, i) => <Draggable
               id="0"
@@ -363,7 +347,6 @@ recordAnimation = () => {
               </Square>
             </Draggable>)}  
                 </Court>
-                
                 <>
                 {jugada ? (
                 <ReactPlayer url={jugada.videoFile} playing={true} controls={true}  width='100%' height='100%'/>
@@ -404,4 +387,4 @@ recordAnimation = () => {
    }
 }
 
-export default EdicionContainer
+export default EdicionTestContainer;

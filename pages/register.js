@@ -14,6 +14,9 @@ export default function Register() {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
+      console.log(user)
+      setUser(user)
+      setUpUserDataBase();
       window.location.replace(`http://localhost:3000/login`); //go to edicion page
       // ...
     })
@@ -29,7 +32,34 @@ export default function Register() {
     setPassword('');
   }
   
- 
+  const setUpUserDataBase = () =>{
+      // firebase.database().ref(`/users/0`).push({  //crea la posicion del usuario en la base de datos 
+      //     name : "Ivo Krivzov",
+      //     email: email,
+      //     plays: [],
+      //     }
+      //   );
+      var ref =  firebase.database().ref(`users/0/${user.uid}`).set({ //crea la posicion del usuario en la base de datos 
+        name:user.uid,
+        plays:[{}],
+      });
+    }
+
+  //   const onSubmit = () =>{
+  //     //hace push
+      
+  //   var ref =  firebase.database().ref('places/').push({ //actualiza la data.   
+  //       "name":place,
+  //       animals:[{
+  //         "animalName":animalName,
+  //         "description":description,
+  //         "id":id
+  //       }
+  //       ]
+  //     });
+  //     resetForm();
+  // }
+  
   return (
     <Layout>
       <RegisterContainer 

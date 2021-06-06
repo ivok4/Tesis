@@ -951,6 +951,11 @@ caniuse-lite@^1.0.30001202, caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.300012
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001228.tgz#bfdc5942cd3326fa51ee0b42fbef4da9d492a7fa"
   integrity sha512-QQmLOGJ3DEgokHbMSA8cj2a+geXqmnpyOFT0lhQV6P3/YOJvGDEwoedcwxEQ30gJIwIIunHIicunJ2rzK5gB2A==
 
+ccapture.js@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ccapture.js/-/ccapture.js-1.1.0.tgz#ac4030e8b43847e305242d784abf284d2313beff"
+  integrity sha512-28kiHJzFsZ6b0OTfKpWpEwK2n/LTAgytK1uzB+413dzjHltdh2hP5Yg2qR0+9Xw3XoBMz5UkGCh8Ektr2rVlmw==
+
 chalk@2.4.2, chalk@^2.0.0:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"

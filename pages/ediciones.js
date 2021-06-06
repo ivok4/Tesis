@@ -1,11 +1,11 @@
-import {LayoutEdicion, Edicion as EdicionContainer} from '../containers'
+import {LayoutEdicion, EdicionTestContainer as EdicionTestContainer} from '../containers'
 import React from "react";
 
 
 export default function Ediciones() {
   return (
     <LayoutEdicion>
-        <EdicionContainer />
+        <EdicionTestContainer />
     </LayoutEdicion>
   )
 }
