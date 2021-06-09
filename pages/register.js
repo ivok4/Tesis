@@ -17,7 +17,7 @@ export default function Register() {
       console.log(user)
       setUser(user)
       setUpUserDataBase();
-      window.location.replace(`http://localhost:3000/login`); //go to edicion page
+      window.location.replace(`/login`); //go to edicion page
       // ...
     })
     .catch((error) => {

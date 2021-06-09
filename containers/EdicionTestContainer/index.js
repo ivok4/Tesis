@@ -138,7 +138,7 @@ if (matrixType === '2d') {
 
 //animacion de los jugadores
  play = () => {
-  const intervaloMov = 1000;
+  const intervaloMov = 3000;
   console.log('--------Play mode!-------')
   var player0 = document.getElementById("0");
   var player1 = document.getElementById("1");
@@ -203,40 +203,130 @@ createRectangulo = () => {
 
 
 //PRUBAS DE GRABACION DE VIDEO
+startRecording () {
+   
+  // const chunks = []; // here we will store our recorded media chunks (Blobs)
+   var canvas = document.querySelector("canvas");
 
- startRecording() {
-  const chunks = []; // here we will store our recorded media chunks (Blobs)
-  const stream = canvas.captureStream(); // grab our canvas MediaStream
-  const rec = new MediaRecorder(stream); // init the recorder
-  // every time the recorder has new data, we will store it in our array
-  rec.ondataavailable = e => chunks.push(e.data);
-  // only when the recorder stops, we construct a complete Blob from all the chunks
-  rec.onstop = e => this.exportVid(new Blob(chunks, {type: 'video/mp4'})); 
+   const stream = canvas.captureStream(); // grab our canvas MediaStream
+
+
+  // const rec = new MediaRecorder(stream); // init the recorder
+  // //mediaRecorder.requestData();
+  // rec.start();
+  // // every time the recorder has new data, we will store it in our array
+  // rec.ondataavailable = e => chunks.push(e.data);
+  // // only when the recorder stops, we construct a complete Blob from all the chunks
   
-  rec.start();
-  setTimeout(()=>rec.stop(), 3000); // stop recording in 3s
+  
+  // console.log(rec.state);
+  // rec.onstop = e => this.exportVid(new Blob(chunks, {type: 'video/webm'})); 
+
+  // setTimeout(()=>rec.stop(), 3000); // stop recording in 3s
+
+//   console.log(chunks);
+//   //console.log(canvas instanceof HTMLCanvasElement) para saber si hay canvas
+
+
+if (navigator.mediaDevices.getUserMedia) {
+  var constraints = { audio: false, video: true };
+  var chunks = [];
+  console.log("succes media");
+
+
+  //var onSuccess = function(stream) {
+    console.log("succes");
+    var options = {
+      audioBitsPerSecond : 0,
+      videoBitsPerSecond : 2500000,
+      mimeType : 'video/webm'
+    }
+    var mediaRecorder = new MediaRecorder(stream,options);
+    //m = mediaRecorder;
+    mediaRecorder.start();
+    mediaRecorder.ondataavailable = function(e) {
+      chunks.push(e.data);
+    }
+
+    mediaRecorder.onstop = function(e) {
+      console.log("data available after MediaRecorder.stop() called.");
+      var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      const vid = document.createElement('video'); 
+      vid.src = URL.createObjectURL(blob);
+      vid.controls = true;
+      document.body.appendChild(vid);
+      const a = document.createElement('a');
+      a.download = 'myvid.webm'; 
+      a.href = vid.src;
+      a.textContent = 'download the video';
+      document.body.appendChild(a);
+      console.log("recorder stopped");
+    };    
+    setTimeout(()=>mediaRecorder.stop(), 3000); // stop recording in 3s
+  }
+//}
+
+} 
+
+exportVid  (blob)  {
+  //  console.log(URL.createObjectURL(blob));
+  //original
+  var associatedBlob = BlobEvent.data
+  console.log(associatedBlob)
+  const vid = document.createElement('video'); 
+  vid.src = URL.createObjectURL(blob);
+  vid.controls = true;
+  document.body.appendChild(vid);
+  const a = document.createElement('a');
+  a.download = 'myvid.webm'; 
+  a.href = vid.src;
+  a.textContent = 'download the video';
+  document.body.appendChild(a);
 }
 
- exportVid(blob) {
-   console.log(URL.createObjectURL(blob));
-  // const vid = document.createElement('video');
-  // vid.src = URL.createObjectURL(blob);
-  // vid.controls = true;
-  // document.body.appendChild(vid);
-  // const a = document.createElement('a');
-  // a.download = 'myvid.mp4';
-  // a.href = vid.src;
-  // a.textContent = 'download the video';
-  // document.body.appendChild(a);
-}
 recordAnimation = () => {
-  var canvas =  document.createElement("canvas");
-  document.getElementById("court").appendChild(canvas);
-  canvas.setAttribute('id','canvas')
+   var canvas =  document.createElement("canvas");
+   document.getElementById("court").appendChild(canvas);
+   canvas.setAttribute('id','canvas')
+
   this.play();
   this.startRecording();
   //$(div).remove();
-}
+
+
+  //   let isRecording= false,
+  //    options= { mimeType: "video/webm; codecs=vp9" }
+  //   const displayOptions= {
+  //   video: {
+  //     cursor: "always"
+  //   },
+  //   audio: false,
+
+  //   },
+  //   mediaRecorder= {},
+  //   stream= {},
+  //   recordedChunks= []
+  
+
+  //  const getStream = async() =>{
+  //   try {
+  //       this.stream =  await navigator.mediaDevices.getDisplayMedia(this.displayOptions);
+  //       this.mediaRecorder = new MediaRecorder(this.stream, this.options);
+  //       this.mediaRecorder.ondataavailable = this.handleDataAvailable;
+  //       this.mediaRecorder.start();
+  //       this.isRecording = true
+  //       console.log(isRecording);
+  //       //rec.onstop = e => this.exportVid(new Blob(chunks, {type: 'video/webm'})); 
+  //       //setTimeout(()=>this.mediaRecorder.stop(), 3000); // stop recording in 3s
+
+  //     } catch(err) {
+  //       this.isRecording = false
+  //       alert(err);
+  //     }
+  //   }
+  }
+
+
 
 //FIN DE PRUEBAS DE GRABACION DE VIDEO
 
@@ -274,6 +364,9 @@ recordAnimation = () => {
   //   this.state.movimientos3,
   //   this.state.movimientos4
   // ]
+
+ 
+  startRecording();
   recordAnimation();
   console.log(savePlay);
   //---------HACER PUSH DE LA JUGADA A FIREBASE-----------------
@@ -296,7 +389,7 @@ recordAnimation = () => {
                     <img src="/Assets/Share-icon.png" />
                     <p>Compartir</p>
                     </SectorNav>
-                    <SectorNav onClick={this.recordAnimation}>
+                    <SectorNav onClick={this.recordAnimation} id="savebutton">
                         <img src="/Assets/Save-icon.png"/>
                         <p>Guardar</p>
                     </SectorNav>
