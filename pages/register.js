@@ -17,7 +17,7 @@ export default function Register() {
       console.log(user)
       setUser(user)
       setUpUserDataBase();
-      window.location.replace(`/login`); //go to edicion page
+      window.location.replace(`/login/`); //go to edicion page
       // ...
     })
     .catch((error) => {
@@ -33,32 +33,11 @@ export default function Register() {
   }
   
   const setUpUserDataBase = () =>{
-      // firebase.database().ref(`/users/0`).push({  //crea la posicion del usuario en la base de datos 
-      //     name : "Ivo Krivzov",
-      //     email: email,
-      //     plays: [],
-      //     }
-      //   );
       var ref =  firebase.database().ref(`users/0/${user.uid}`).set({ //crea la posicion del usuario en la base de datos 
         name:user.uid,
         plays:[{}],
       });
     }
-
-  //   const onSubmit = () =>{
-  //     //hace push
-      
-  //   var ref =  firebase.database().ref('places/').push({ //actualiza la data.   
-  //       "name":place,
-  //       animals:[{
-  //         "animalName":animalName,
-  //         "description":description,
-  //         "id":id
-  //       }
-  //       ]
-  //     });
-  //     resetForm();
-  // }
   
   return (
     <Layout>
