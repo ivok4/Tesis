@@ -91,8 +91,6 @@ export const Court = styled.div`
     
 `
 
-
-
 export const Navbar = styled.nav`
     width:100%;
     height:50px;
@@ -109,13 +107,19 @@ export const Navbar = styled.nav`
        padding:0 2%;
        img{
            width:4%;
-           //height:fit-content;
            margin-left:3%;
+       }
+       a{
+           width: 8%;
+           img{
+               width: 60%;
+               margin-left:15%;
+
+           }
        }
        h1{
            margin:0;
            font-size:20px;
-           margin-left:3%;
        }
        p{
            margin:0;
