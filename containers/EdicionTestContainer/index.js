@@ -87,7 +87,7 @@ class EdicionTestContainer extends React.Component {
 
    handleMovUpdate = (move, event) => {
 var player = document.getElementById(move);
-const style = window.getComputedStyle(player)
+const style = window.getComputedStyle(player);
 const matrix = style['transform'] || style.webkitTransform || style.mozTransform
 
 // No transform property. Simply return 0 values.
@@ -134,6 +134,7 @@ if (matrixType === '2d') {
             break;
     }  
   }
+  console.log(this.state.movimientos0);
 }
 
 //animacion de los jugadores
@@ -203,130 +204,201 @@ createRectangulo = () => {
 
 
 //PRUBAS DE GRABACION DE VIDEO
-startRecording () {
-   
-  // const chunks = []; // here we will store our recorded media chunks (Blobs)
-   var canvas = document.querySelector("canvas");
 
-   const stream = canvas.captureStream(); // grab our canvas MediaStream
+// handleClick = () =>{
+// //   var canvas =  document.createElement("canvas");
+// //    document.getElementById("court").appendChild(canvas);
+// //    canvas.setAttribute('id','canvas');
 
 
-  // const rec = new MediaRecorder(stream); // init the recorder
-  // //mediaRecorder.requestData();
-  // rec.start();
-  // // every time the recorder has new data, we will store it in our array
-  // rec.ondataavailable = e => chunks.push(e.data);
-  // // only when the recorder stops, we construct a complete Blob from all the chunks
+// // var x = 0;
+// // this.anim();
+// // this.startRecording();
+// console.log("apreto boton");
+// navigator.mediaDevices.getUserMedia({
+//   video: true,
+//   audio: true
+// }).then(async function(stream) {
+//   console.log("async function");
+//   let recorder = RecordRTC(stream, {
+//       type: 'video'
+//   });
+//   console.log("empezo la grabacion");
+//   recorder.startRecording();
+
+//   const sleep = m => new Promise(r => setTimeout(r, m));
+//   await sleep(3000);
+
+//   recorder.stopRecording(function() {
+//       let blob = recorder.getBlob();
+//       invokeSaveAsDialog(blob);
+//   });
+// });
+
+// }
+//  startRecording = () =>{
+//   const chunks = []; // here we will store our recorded media chunks (Blobs)
+//   const stream = canvas.captureStream(); // grab our canvas MediaStream
+//   const rec = new MediaRecorder(stream); // init the recorder
+//   // every time the recorder has new data, we will store it in our array
+//   rec.ondataavailable = e => chunks.push(e.data);
+//   // only when the recorder stops, we construct a complete Blob from all the chunks
+//   rec.onstop = e => this.exportVid(new Blob(chunks, {type: 'video/webm'}));
   
+//   rec.start();
+//   setTimeout(()=>rec.stop(), 3000); // stop recording in 3s
+// }
+
+//  exportVid = (blob) =>{
+//   const vid = document.createElement('video');
+//   vid.src = URL.createObjectURL(blob);
+//   vid.controls = true;
+//   document.body.appendChild(vid);
+//   const a = document.createElement('a');
+//   a.download = 'myvid.webm';
+//   a.href = vid.src;
+//   a.textContent = 'download the video';
+//   document.body.appendChild(a);
+// }
+
+//  anim = () =>{
+//   //console.log("guardado");
+//    //const ctx = canvas.getContext('2d');
+//   // var x = 0;
+//   // x = (x + 1) % canvas.width;
+//   // ctx.fillStyle = none;
+//   // ctx.fillRect(0,0,canvas.width,canvas.height);
+//   // ctx.fillStyle = 'red';
+//   // ctx.fillRect(x - 20, 0, 40, 40);
+//   // requestAnimationFrame(this.anim);
+
+
+//    const ctx = canvas.getContext('2d');
+
+
+//    const intervaloMov = 3000;
+
+//    var player0 = document.getElementById("0"); 
   
-  // console.log(rec.state);
-  // rec.onstop = e => this.exportVid(new Blob(chunks, {type: 'video/webm'})); 
+//   this.state.movimientos0.forEach((movimiento,index) => {
+//     setTimeout(() => {
+//       console.log("guardado");
+//         console.log("0 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+//         player0.style.transition= "transform 0.5s linear";
+//         //player0.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+        
+//         ctx.fillStyle = 'red';
+//         ctx.fillRect(0, 0, 15, 15);
+//         ctx.translate(`${movimiento.posx}px`, `${movimiento.posy}px`);
+//         console.log(ctx);
+//       }, intervaloMov * (index + 1));
+// });
 
-  // setTimeout(()=>rec.stop(), 3000); // stop recording in 3s
-
-//   console.log(chunks);
-//   //console.log(canvas instanceof HTMLCanvasElement) para saber si hay canvas
 
 
-if (navigator.mediaDevices.getUserMedia) {
-  var constraints = { audio: false, video: true };
-  var chunks = [];
-  console.log("succes media");
+// // // Moved square
+// // ctx.translate(110, 30);
+// // ctx.fillStyle = 'red';
+// // ctx.fillRect(0, 0, 80, 80);
 
+// // // Reset current transformation matrix to the identity matrix
+// // ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  //var onSuccess = function(stream) {
-    console.log("succes");
-    var options = {
-      audioBitsPerSecond : 0,
-      videoBitsPerSecond : 2500000,
-      mimeType : 'video/webm'
+// // // Unmoved square
+// // ctx.fillStyle = 'gray';
+// // ctx.fillRect(0, 0, 80, 80);
+  
+// }
+
+ handleClick = () =>{
+ var canvasCreator =  document.createElement("canvas");
+document.getElementById("court").appendChild(canvasCreator);
+canvasCreator.setAttribute('id','canvas');
+  var canvas = document.querySelector("canvas");
+
+  // Optional frames per second argument.
+  var stream = canvas.captureStream(25);
+  var recordedChunks = [];
+  var x =0;
+
+  
+  var options = { mimeType: "video/webm; codecs=vp9" };
+  const mediaRecorder = new MediaRecorder(stream, options);
+  
+  mediaRecorder.ondataavailable = handleDataAvailable;
+  mediaRecorder.start();
+  this.anim();
+  
+  function handleDataAvailable(event) {
+    console.log("data-available");
+    if (event.data.size > 0) {
+      recordedChunks.push(event.data);
+      console.log(recordedChunks);
+      download();
+    } else {
+      // ...
     }
-    var mediaRecorder = new MediaRecorder(stream,options);
-    //m = mediaRecorder;
-    mediaRecorder.start();
-    mediaRecorder.ondataavailable = function(e) {
-      chunks.push(e.data);
-    }
-
-    mediaRecorder.onstop = function(e) {
-      console.log("data available after MediaRecorder.stop() called.");
-      var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
-      const vid = document.createElement('video'); 
-      vid.src = URL.createObjectURL(blob);
-      vid.controls = true;
-      document.body.appendChild(vid);
-      const a = document.createElement('a');
-      a.download = 'myvid.webm'; 
-      a.href = vid.src;
-      a.textContent = 'download the video';
-      document.body.appendChild(a);
-      console.log("recorder stopped");
-    };    
-    setTimeout(()=>mediaRecorder.stop(), 3000); // stop recording in 3s
   }
-//}
-
-} 
-
-exportVid  (blob)  {
-  //  console.log(URL.createObjectURL(blob));
-  //original
-  var associatedBlob = BlobEvent.data
-  console.log(associatedBlob)
-  const vid = document.createElement('video'); 
-  vid.src = URL.createObjectURL(blob);
-  vid.controls = true;
-  document.body.appendChild(vid);
-  const a = document.createElement('a');
-  a.download = 'myvid.webm'; 
-  a.href = vid.src;
-  a.textContent = 'download the video';
-  document.body.appendChild(a);
+  function download() {
+    var blob = new Blob(recordedChunks, {
+      type: "video/webm"
+    });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    a.href = url;
+    a.download = "test.webm";
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
+  // demo: to download after 9sec
+  setTimeout(event => {
+    console.log("stopping");
+    mediaRecorder.stop();
+  }, 9000);
+  
 }
 
-recordAnimation = () => {
-   var canvas =  document.createElement("canvas");
-   document.getElementById("court").appendChild(canvas);
-   canvas.setAttribute('id','canvas')
+ anim = () => {
+  var x = this.state.movimientos0;
+  console.log(x);
+  const intervaloMov = 3000;
+  console.log('--------Play mode!-------')
+  var player0 = document.getElementById("0");
 
-  this.play();
-  this.startRecording();
-  //$(div).remove();
-
-
-  //   let isRecording= false,
-  //    options= { mimeType: "video/webm; codecs=vp9" }
-  //   const displayOptions= {
-  //   video: {
-  //     cursor: "always"
-  //   },
-  //   audio: false,
-
-  //   },
-  //   mediaRecorder= {},
-  //   stream= {},
-  //   recordedChunks= []
-  
-
-  //  const getStream = async() =>{
-  //   try {
-  //       this.stream =  await navigator.mediaDevices.getDisplayMedia(this.displayOptions);
-  //       this.mediaRecorder = new MediaRecorder(this.stream, this.options);
-  //       this.mediaRecorder.ondataavailable = this.handleDataAvailable;
-  //       this.mediaRecorder.start();
-  //       this.isRecording = true
-  //       console.log(isRecording);
-  //       //rec.onstop = e => this.exportVid(new Blob(chunks, {type: 'video/webm'})); 
-  //       //setTimeout(()=>this.mediaRecorder.stop(), 3000); // stop recording in 3s
-
-  //     } catch(err) {
-  //       this.isRecording = false
-  //       alert(err);
-  //     }
-  //   }
-  }
+  this.state.movimientos0.forEach((movimiento,index) => { 
+      setTimeout(() => {
+          console.log("0 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+          //player0.style.transition= "transform 0.5s linear";
+          //player0.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+          var ctx = canvas.getContext("2d");
+          ctx.beginPath();
+          ctx.arc(movimiento.posx, movimiento.posy, 5, 0, 2 * Math.PI, false); 
+          ctx.stroke();
+          ctx.fillStyle = '#C4342C';
+          ctx.fill();
+          ctx.lineWidth = 0; 
+          ctx.strokeStyle = '#C4342C';
+          ctx.stroke();
+          //ctx.moveTo(70, 70);
+          requestAnimationFrame(this.anim);
+        }, intervaloMov * (index + 1)); 
+  });
 
 
+  // var ctx = canvas.getContext("2d");
+  // ctx.beginPath();
+  // ctx.arc(100, 75, 5, 0, 2 * Math.PI);
+  // ctx.stroke();
+  // ctx.fillStyle = '#C4342C';
+  // ctx.fill();
+  // ctx.lineWidth = 0;
+  // ctx.strokeStyle = '#C4342C';
+  // ctx.stroke();
+  // requestAnimationFrame(anim);
+}
 
 //FIN DE PRUEBAS DE GRABACION DE VIDEO
 
@@ -372,6 +444,51 @@ recordAnimation = () => {
   //---------HACER PUSH DE LA JUGADA A FIREBASE-----------------
 }
 
+//  getTranslateX() {
+//   var style = window.getComputedStyle(myElement);
+//   var matrix = new WebKitCSSMatrix(style.transform);
+//   console.log('translateX: ', matrix.m41);
+// }
+
+handlePositionClick = () =>{
+console.log("poisiton click");
+const self = this;
+let stateUpdates = {};
+this.state.components.forEach((player,i) => {
+  var player = document.getElementById(i);
+  var style = window.getComputedStyle(player);
+  var matrix = new WebKitCSSMatrix(style.transform);
+  let posy = matrix.f;
+  let posx = matrix.m41;
+  stateUpdates = {posy,posx}
+  console.log('translateX: ', matrix.m41);
+  console.log('translateY: ', matrix.f);
+  //guardar las posiciones en el state  
+  //self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
+        switch (i) {
+            case 0:
+              self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]});
+            break;
+            case 1:
+              this.setState({movimientos1: [...this.state.movimientos1, stateUpdates]});
+              break;
+            case 2:
+              this.setState({movimientos2: [...this.state.movimientos2, stateUpdates]});
+                break;
+            case 3:
+              this.setState({movimientos3: [...this.state.movimientos3, stateUpdates]});
+                break;
+            case 4:
+              this.setState({movimientos4: [...this.state.movimientos4, stateUpdates]});
+                break;       
+            default:
+                break;
+        }  
+});
+console.log(this.state.movimientos0);
+console.log(stateUpdates);
+}
+
    render(){
     const { components, shapes} = this.state;
     const jugada = this.props.jugada;
@@ -389,7 +506,7 @@ recordAnimation = () => {
                     <img src="/Assets/Share-icon.png" />
                     <p>Compartir</p>
                     </SectorNav>
-                    <SectorNav onClick={this.recordAnimation} id="savebutton">
+                    <SectorNav onClick={this.handleClick} id="savebutton">
                         <img src="/Assets/Save-icon.png"/>
                         <p>Guardar</p>
                     </SectorNav>
@@ -423,7 +540,7 @@ recordAnimation = () => {
               position={null} 
               grid={[1, 1]}
               scale={1} 
-              onStop={(event, data) => this.handleMovUpdate(i, event)} 
+              // onStop={(event, data) => this.handleMovUpdate(i, event)} 
               >
               <RedDot className="handle" id={i}>
                 <p>{i+1}</p>
@@ -470,7 +587,10 @@ recordAnimation = () => {
             <div>
               <p>Agregar posicion de la animación -- </p>
             </div>
-            <div>
+            <div              
+           onClick={(event) => this.handlePositionClick(event)} 
+            //onClick={(event, data) => this.handleMovUpdate(0, event)} 
+            >
               <img src="/Assets/AddPos-icon.svg"/>
             </div>
           </AnimatorBar>

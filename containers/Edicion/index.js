@@ -5,6 +5,7 @@ import Draggable from 'react-draggable';
 import { Canvas } from '../../components';
 import FreeTransform from 'react-free-transform'
 import ReactPlayer from 'react-player'
+import firebase from '../../lib/fire';
 import {Container,
 Court,
 Sidebar,
@@ -48,7 +49,8 @@ class EdicionContainer extends React.Component {
       styleMovimientos4: [],
       components: [],
       shapes: [],
-      positions: []
+      positions: [],
+      userId: '',
       };
   }  
   
@@ -84,57 +86,6 @@ class EdicionContainer extends React.Component {
     console.log("handle stop data: "+ data)
   }
 
-   handleMovUpdate = (move, event) => {
-var player = document.getElementById(move);
-const style = window.getComputedStyle(player)
-const matrix = style['transform'] || style.webkitTransform || style.mozTransform
-
-// No transform property. Simply return 0 values.
-if (matrix === 'none') {
-  return {
-    x: 0,
-    y: 0,
-    z: 0
-  }
-}
-
-// Can either be 2d or 3d transform
-const matrixType = matrix.includes('3d') ? '3d' : '2d'
-const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
-
-// 2d matrices have 6 values
-// Last 2 values are X and Y.
-// 2d matrices does not have Z value.
-if (matrixType === '2d') {
-//--------GUARDAR X E Y EN STATE-----------
-  const newPos = {
-    posx: Math.round(matrixValues[4]),
-    posy: Math.round(matrixValues[5])
-  }
-
-    switch (move) {
-        case 0:
-         this.setState({movimientos0: [...this.state.movimientos0, newPos]});
-        break;
-        case 1:
-          this.setState({movimientos1: [...this.state.movimientos1, newPos]});
-          break;
-        case 2:
-          this.setState({movimientos2: [...this.state.movimientos2, newPos]});
-            break;
-        case 3:
-          this.setState({movimientos3: [...this.state.movimientos3, newPos]});
-            break;
-        case 4:
-          this.setState({movimientos4: [...this.state.movimientos4, newPos]});
-            break;
-    
-        default:
-            break;
-    }  
-  }
-}
-
 //animacion de los jugadores
  play = () => {
   const intervaloMov = 1000;
@@ -144,7 +95,6 @@ if (matrixType === '2d') {
   var player2 = document.getElementById("2");
   var player3 = document.getElementById("3");
   var player4 = document.getElementById("4");
-
 
   this.state.movimientos0.forEach((movimiento,index) => {
       setTimeout(() => {
@@ -198,104 +148,90 @@ createRectangulo = () => {
 }
 
 
-
-
-
-//PRUBAS DE GRABACION DE VIDEO
-
- startRecording() {
-  // const chunks = []; // here we will store our recorded media chunks (Blobs)
-  // const stream = canvas.captureStream(); // grab our canvas MediaStream
-  // const rec = new MediaRecorder(stream); // init the recorder
-  // // every time the recorder has new data, we will store it in our array
-  // rec.ondataavailable = e => chunks.push(e.data);
-  // // only when the recorder stops, we construct a complete Blob from all the chunks
-  // rec.onstop = e => exportVid(new Blob(chunks, {type: 'video/webm'}));
-  
-  // rec.start();
-  // setTimeout(()=>rec.stop(), 3000); // stop recording in 3s
-
-  console.log("hoa");
-
-  if (navigator.mediaDevices.getUserMedia) {
-    console.log("hola1");
-    var constraints = { audio: true, video: true };
-    var chunks = [];
-  
-    var onSuccess = function(stream) {
-      var options = {
-        audioBitsPerSecond : 128000,
-        videoBitsPerSecond : 2500000,
-        mimeType : 'video/mp4'
-      }
-      var mediaRecorder = new MediaRecorder(stream,options);
-      m = mediaRecorder;
-//  ...
-      console.log("hola2");
-    }
-  }
-
-}
-
- exportVid(blob) {
-  const vid = document.createElement('video');
-  vid.src = URL.createObjectURL(blob);
-  vid.controls = true;
-  document.body.appendChild(vid);
-  const a = document.createElement('a');
-  a.download = 'myvid.webm';
-  a.href = vid.src;
-  a.textContent = 'download the video';
-  document.body.appendChild(a);
-}
-recordAnimation = () => {
-  this.play();
-  this.startRecording();
-}
-
-//FIN DE PRUEBAS DE GRABACION DE VIDEO
-
-
-
-
-// recordAnimation = () => {
-//   this.play();
-//   if (navigator.mediaDevices.getUserMedia) {
-//     var constraints = { audio: false, video: true };
-//     var chunks = [];
-  
-//     var onSuccess = function(stream) {
-//       var options = {
-//         videoBitsPerSecond : 2500000,
-//         mimeType : 'video/mp4'
+// //get userId
+//    authListener = () =>{
+//     firebase.auth().onAuthStateChanged(user => {
+//       if(user){
+//         this.props.userId = user.uid;
 //       }
-//       var mediaRecorder = new MediaRecorder(stream,options);
-//       m = mediaRecorder;
-//       mediaRecorder.ondataavailable = e => chunks.push(e.data);
-//       //mediaRecorder.onstop = e => exportVid(new Blob(chunks, {type: 'video/webm'}));
-//       mediaRecorder.onstop = e => console.log("chunks");
-//       mediaRecorder.start();
-//       setTimeout(()=>mediaRecorder.stop(), 3000); // stop recording in 3s
-//       console.log(chunks);
-//     }
-//     console.log(chunks);
+//       else{
+//         setUser('');        
+//       }
+//     })
 //   }
-// }
+
+ 
+//end get userID
  handleSaveClck = () => {
-  // const savePlay = [
-  //   this.state.movimientos0,
-  //   this.state.movimientos1,
-  //   this.state.movimientos2,
-  //   this.state.movimientos3,
-  //   this.state.movimientos4
-  // ]
-  recordAnimation();
+  //this.authListener;
+  // useEffect(() => {
+  //   authListener();
+  // }, []) // empty dependency array = only called on mount and unmount
+
+  console.log(`este es el usuario id: ${this.props.userId}`);
+  console.log(this.state.userId);
+  const savePlay = [
+    this.state.movimientos0,
+    this.state.movimientos1,
+    this.state.movimientos2,
+    this.state.movimientos3,
+    this.state.movimientos4
+  ]
   console.log(savePlay);
   //---------HACER PUSH DE LA JUGADA A FIREBASE-----------------
+
+  var ref = firebase.database().ref(`/users/0/${this.props.userId}/plays/`);
+
+
+
+  var blast = ref.child(this.props.playId); //recibe el valor de iteracion, que es igual al id del "animal" en la base de datos
+        blast.update({ //actualiza la data.
+          "animations": savePlay
+        });
 }
 
+
+handlePositionClick = () =>{
+  console.log("poisiton click");
+  const self = this;
+  let stateUpdates = {};
+  this.state.components.forEach((player,i) => {
+    var player = document.getElementById(i);
+    var style = window.getComputedStyle(player);
+    var matrix = new WebKitCSSMatrix(style.transform);
+    let posy = matrix.f;
+    let posx = matrix.m41;
+    stateUpdates = {posy,posx}
+    console.log('translateX: ', matrix.m41);
+    console.log('translateY: ', matrix.f);
+    //guardar las posiciones en el state  
+    //self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
+          switch (i) {
+              case 0:
+                self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]});
+              break;
+              case 1:
+                this.setState({movimientos1: [...this.state.movimientos1, stateUpdates]});
+                break;
+              case 2:
+                this.setState({movimientos2: [...this.state.movimientos2, stateUpdates]});
+                  break;
+              case 3:
+                this.setState({movimientos3: [...this.state.movimientos3, stateUpdates]});
+                  break;
+              case 4:
+                this.setState({movimientos4: [...this.state.movimientos4, stateUpdates]});
+                  break;       
+              default:
+                  break;
+          }  
+  });
+  console.log(this.state.movimientos0);
+  console.log(stateUpdates);
+  }
+
    render(){
-    const { components, shapes} = this.state;
+    const { components, shapes} = this.state; 
     const jugada = this.props.jugada;
     console.log(jugada);
     return(
@@ -311,7 +247,7 @@ recordAnimation = () => {
                     <img src="/Assets/Share-icon.png" />
                     <p>Compartir</p>
                     </SectorNav>
-                    <SectorNav onClick={this.recordAnimation}>
+                    <SectorNav onClick={this.handleSaveClck}>
                         <img src="/Assets/Save-icon.png"/>
                         <p>Guardar</p>
                     </SectorNav>
@@ -346,7 +282,7 @@ recordAnimation = () => {
               position={null} 
               grid={[1, 1]}
               scale={1} 
-              onStop={(event, data) => this.handleMovUpdate(i, event)} 
+              //onStop={(event, data) => this.handleMovUpdate(i, event)} 
               >
               <RedDot className="handle" id={i}>
                 <p>{i+1}</p>
@@ -394,7 +330,8 @@ recordAnimation = () => {
             <div>
               <p>Agregar posicion de la animación -- </p>
             </div>
-            <div>
+            <div               
+            onClick={this.handlePositionClick} >
               <img src="/Assets/AddPos-icon.svg"/>
             </div>
           </AnimatorBar>

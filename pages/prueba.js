@@ -1,136 +1,144 @@
-import {Layout} from '../containers'
-import React from "react";
-
+import {Layout, VideoPlayer} from '../containers'
+import React, { useState, useEffect } from "react";
+import Draggable from 'react-draggable';
+import firebase from '../lib/fire';
 
 
 export default function prueba() {
+  //const [movimientos0, setmMvimientos0] = useState([{posx:397, posy:333},{posx:681, posy:164}]);
+  const [movimientos0, setMovimientos0] = useState([]);
+  const [movimientos1, setMovimientos1] = useState([]);
+  const [movimientos2, setMovimientos2] = useState([]);
+  const [movimientos3, setMovimientos3] = useState([]);
+  const [movimientos4, setMovimientos4] = useState([]);
+  const [players, setPlayers] = useState('');
+  const [components, setComponents] = useState([]);
+  const [jugada, setJugada] = useState([]);
 
-//     let isRecording= false,
-//      options =  { mimeType: "video/webm; codecs=vp9" },
-//     displayOptions= {
-//     video: {
-//       cursor: "always"
-//     },
-//     audio: {
-//         echoCancellation: false,
-//         noiseSuppression: false,
-//         sampleRate: 44100
-//       }
-//     },
-//     mediaRecorder= {},
-//     stream= {},
-//     recordedChunks= []
-//   }
-
-//   const downloadFunction =() =>{
-//         var blob = new Blob(this.recordedChunks, {
-//         type: "video/webm"
-//       });
-//     var url = URL.createObjectURL(blob);
-//     var a = document.createElement("a");
-//     document.body.appendChild(a);
-//     a.style = "display: none";
-//     a.href = url;
-//     var d = new Date();
-//     var n = d.toUTCString();
-//     a.download = n+".webm";
-//     a.click();
-//     window.URL.revokeObjectURL(url);
-//     this.recordedChunks = []
-//     this.showNotification()
-//     }
-//     const  showNotification =()=> {
-//       var img = '/logo.png';
-//       var text = 'If you enjoyed this product consider donating!';
-//       navigator.serviceWorker.getRegistration().then(function(reg) {
-//         reg.showNotification('Screen Recorder', { body: text, icon: img, requireInteraction: true,
-//         actions: [
-//             {action: 'donate', title: 'Donate',icon: 'logo.png'},
-//             {action: 'close', title: 'Close',icon: 'logo.png'}
-//             ]
-//               });
-//       });
-//     }
-//     const handleDataAvailable = (event) =>{
-//       if (event.data.size > 0) {
-//         this.recordedChunks.push(event.data);
-//         this.isRecording = false
-//         this.download();
-//       } else {
-//         // ...
-//       }
-//     }
-//     const  stopStream=()=> {
-//       this.mediaRecorder.stop()
-//     }
-//     const getStream = async () => {
-//     try {
-//         this.stream =  await navigator.mediaDevices.getDisplayMedia(this.displayOptions);
-//         this.mediaRecorder = new MediaRecorder(this.stream, this.options);
-//         this.mediaRecorder.ondataavailable = this.handleDataAvailable;
-//         this.mediaRecorder.start();
-//         this.isRecording = true
-//       } catch(err) {
-//         this.isRecording = false
-//         alert(err);
-//       }
-//     }
   
-
-const boton = () => {
-
-const canvas =  document.getElementById("canvas");
-const ctx = canvas.getContext('2d');
-var x = 0;
-anim();
-startRecording();
-
-function startRecording() {
-  const chunks = []; // here we will store our recorded media chunks (Blobs)
-  const stream = canvas.captureStream(); // grab our canvas MediaStream
-  const rec = new MediaRecorder(stream); // init the recorder
-  // every time the recorder has new data, we will store it in our array
-  rec.ondataavailable = e => chunks.push(e.data);
-  // only when the recorder stops, we construct a complete Blob from all the chunks
-  rec.onstop = e => exportVid(new Blob(chunks, {type: 'video/webm'}));
   
-  rec.start();
-  setTimeout(()=>rec.stop(), 5000); // stop recording in 3s
+  const RedDot = {
+    height:"50px",
+    width:"50px",
+    borderRadius:"50px",
+    backgroundColor:"#C4342C",
+    color:"#FFF",
+    fontSize: "20px",
+    textAlign: "center"
+  }
+  
+  
+  const Widget = () => <Draggable
+  id="0"
+  handle=".handle"
+  defaultPosition={{x: 0, y: 0}}
+  grid={[1, 1]}
+  scale={1}
+  onStop={(event, data) => this.handleStop(1, event)}
+  >
+  <RedDot className="handle">
+    <p></p>
+  </RedDot>          
+  </Draggable> ;
+
+
+const getPlayers = () =>{
+  jugada.forEach(function (user,i) {
+    var node = document.createElement("div");
+    var playerCreator = document.getElementById("layout").appendChild(node);
+    playerCreator.setAttribute('id',i);
+    playerCreator.setAttribute('class',"RedDot");
+
+  });
 }
 
-function exportVid(blob) {
-  const vid = document.createElement('video');
-  vid.src = URL.createObjectURL(blob);
-  vid.controls = true;
-  document.body.appendChild(vid);
-  const a = document.createElement('a');
-  a.download = 'myvid.webm';
-  a.href = vid.src;
-  a.textContent = 'download the video';
-  document.body.appendChild(a);
-}
 
-function anim(){ 
-  x = (x + 1) % canvas.width;
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = 'black';
-  ctx.fillRect(x - 20, 0, 40, 40);
-  requestAnimationFrame(anim);
-}
 
+//https://tesis-37b65-default-rtdb.firebaseio.com/users/0/x3mvAyACoIPwW1f5FFoeUGQWtuB2/plays/3/animations
+
+useEffect(() => {
+  const fetchData = async () => {
+      try {
+          const { data } = await firebase.database().ref(`users/0/x3mvAyACoIPwW1f5FFoeUGQWtuB2/plays/3/animations`).once('value').then((snapshot) => {
+            var username = (snapshot.val())|| 'Anonymous';               
+            setMovimientos0(username[0]);
+            setMovimientos1(username[1]);
+            setMovimientos2(username[2]);
+            setMovimientos3(username[3]);
+            setMovimientos4(username[4]);
+            setJugada(username);
+            getPlayers();
+          });
+      } catch (error) {
+          console.error("este es mi error", error);
+      }
+  };
+  fetchData();
+}, []);
+
+
+//animacion de los jugadores
+const play = () => {
+//console.log(jugada);
+getPlayers();
+ const intervaloMov = 1000;
+ console.log('--------Play mode!-------')
+ var player0 = document.getElementById("0");
+ var player1 = document.getElementById("1");
+ var player2 = document.getElementById("2");
+ var player3 = document.getElementById("3");
+ var player4 = document.getElementById("4");
+
+//  movimientos0.forEach((movimiento,index) => {
+//      setTimeout(() => {
+//          console.log("0 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+//          player0.style.transition= "transform 0.5s linear";
+//           player0.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+//        }, intervaloMov * (index + 1));
+//  });
+
+//  movimientos1.forEach((movimiento,index) => {
+//    setTimeout(() => {
+//        console.log("1 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+//        player1.style.transition= "transform 0.5s linear";
+//        player1.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+//      }, intervaloMov * (index + 1));
+// });
+
+
+
+// movimientos2.forEach((movimiento,index) => {
+//  setTimeout(() => {
+//      console.log("2 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+//      player2.style.transition= "transform 0.5s linear";
+//      player2.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+//    }, intervaloMov * (index + 1));
+// });
+// movimientos3.forEach((movimiento,index) => {
+//  setTimeout(() => {
+//      console.log("3 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+//      player3.style.transition= "transform 0.5s linear";
+//      player3.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+//    }, intervaloMov * (index + 1));
+// });
+// movimientos4.forEach((movimiento,index) => {
+//  setTimeout(() => {
+//      console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+//      player4.style.transition= "transform 0.5s linear";
+//      player4.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+//    }, intervaloMov * (index + 1));
+// });  
+}
+const handleClick = () =>{
+  
+  
 }
   return (
-    <>
+    
     <Layout>
-
-        
-      hola
-      <button onClick={boton}></button>
-      <canvas id="canvas"></canvas>
-
+      <VideoPlayer />
     </Layout>
-    </>
+    
   )
   
 }

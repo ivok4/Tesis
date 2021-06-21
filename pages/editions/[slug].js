@@ -40,7 +40,7 @@ export default function Editions({slug}) {
   };
   return (
     <LayoutEdicion>
-         <EdicionContainer jugada={jugada}/>  
+         <EdicionContainer jugada={jugada} playId={playId} userId={usuario}/>  
     </LayoutEdicion>
   )
 }
