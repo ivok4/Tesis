@@ -86,9 +86,48 @@ for(let i = 0; i < animations.length; i++){
 //fin de la animacion de los jugadores
 
     return(
+        <>
+          <Navbar>
+                <div>
+                    <img src="/Assets/Menu-icon.png" href='../index' />
+                    <a href="/login"><img src="/Assets/BackArrow.png" href='../index' /></a>
+                    <h1>Tacticas</h1>
+                </div>
+                <div className="buttons">
+                    <SectorNav>
+                    <img src="/Assets/Share-icon.png" />
+                    <p>Compartir</p>
+                    </SectorNav>
+                    <SectorNav>
+                        <img src="/Assets/Save-icon.png"/>
+                        <p>Guardar</p>
+                    </SectorNav>
+                </div>
+            </Navbar>
         <Container>
+          <Sidebar>
+            <div>
+              <img src="/Assets/Player-icon.png" />
+            </div>
+            <div>
+              <img src="/Assets/Ball-icon.png" />
+            </div>
+            <div>
+              <img src="/Assets/Line-icon.png" /> 
+            </div> 
+            <div>
+              <img src="/Assets/Shape-icon.png" />
+            </div>
+          </Sidebar> 
           <Court id="Court">
           </Court> 
+          <>
+                {jugadaData ? (
+                <ReactPlayer url={jugadaData.videoFile} playing={true} controls={true}  width='100%' height='100%'/>
+              ): ( 
+                <p>no hay video</p>
+                )}     
+              </>
           <div></div>
           <AnimatorBar>
             <p>Controles</p>
@@ -100,5 +139,6 @@ for(let i = 0; i < animations.length; i++){
             <p>{name}</p>
           </AnimatorBar>
         </Container>
+        </>
       )
    }

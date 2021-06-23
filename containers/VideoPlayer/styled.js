@@ -2,13 +2,12 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 100% auto;
+  grid-template-columns: 0.2fr 3.8fr 1.5fr;
+  grid-template-rows: 1.9fr 0.1fr;
   gap: 0px 0px;
   grid-template-areas:
     ". ."
     ". .";
-    height: 93vh;
     video{
         background: url("/Assets/Backgorund-vide.jpg");
     }
@@ -174,15 +173,6 @@ export const Sidebar = styled.div`
         font-family: 'Comic Neue Bold';
     }
 `
-// export const RedDot = styled.div`
-//     height:50px;
-//     width:50px;
-//     border-radius:50px;
-//     background-color:#C4342C;
-//     color:#FFF;
-//     font-size: 20px;
-//     text-align: center;
-// `
 
 export const Title = ({ children, ...props }) => <H1 {...props}>{children}</H1>;
 export const AnimatorBar = styled.div`
