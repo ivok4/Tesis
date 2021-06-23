@@ -4,7 +4,7 @@ import Draggable from 'react-draggable';
 import firebase from '../lib/fire';
 
 
-export default function prueba() {
+export default function playVideo() {
   //const [movimientos0, setmMvimientos0] = useState([{posx:397, posy:333},{posx:681, posy:164}]);
   const [movimientos0, setMovimientos0] = useState([]);
   const [movimientos1, setMovimientos1] = useState([]);

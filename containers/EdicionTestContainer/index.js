@@ -48,7 +48,7 @@ class EdicionTestContainer extends React.Component {
       styleMovimientos4: [],
       components: [],
       shapes: [],
-      positions: [],
+      positions: [0],
       canvasState: "false",
       };
   }  
@@ -452,6 +452,9 @@ canvasCreator.setAttribute('id','canvas');
 
 handlePositionClick = () =>{
 console.log("poisiton click");
+let {count} = this.state.positions;
+this.setState({positions: [...this.state.positions, count++]});
+console.log(this.state.positions);
 const self = this;
 let stateUpdates = {};
 this.state.components.forEach((player,i) => {
@@ -461,10 +464,9 @@ this.state.components.forEach((player,i) => {
   let posy = matrix.f;
   let posx = matrix.m41;
   stateUpdates = {posy,posx}
-  console.log('translateX: ', matrix.m41);
-  console.log('translateY: ', matrix.f);
+  //console.log('translateX: ', matrix.m41);
+  //console.log('translateY: ', matrix.f);
   //guardar las posiciones en el state  
-  //self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
         switch (i) {
             case 0:
               self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]});
@@ -485,13 +487,12 @@ this.state.components.forEach((player,i) => {
                 break;
         }  
 });
-console.log(this.state.movimientos0);
-console.log(stateUpdates);
 }
 
    render(){
-    const { components, shapes} = this.state;
+    const { components, shapes, positions} = this.state;
     const jugada = this.props.jugada;
+    let nums = [positions]
     console.log(jugada);
     return(
       <>
@@ -540,7 +541,6 @@ console.log(stateUpdates);
               position={null} 
               grid={[1, 1]}
               scale={1} 
-              // onStop={(event, data) => this.handleMovUpdate(i, event)} 
               >
               <RedDot className="handle" id={i}>
                 <p>{i+1}</p>
@@ -578,17 +578,23 @@ console.log(stateUpdates);
             <div>
               <img src="/Assets/FullScreen-icon.svg"/>
             </div>
+            {nums.map(i =>
             <div>
-              {/*<p>1</p>
-               <img src="/Assets/AnimPos-icon.svg"/> */}
-               {/* {
-              positions.map((Widget, i) => <p>1</p>)}  */}
+              <p>{i}</p>
             </div>
+            )}  
+            {/* <div>
+              <p>1</p>
+               <img src="/Assets/AnimPos-icon.svg"/> 
+               
+              {positions.map((Widget, i) => <p>1</p>)}  
+               {positions.map((p, i) => <p>{i}</p> )}
+            </div> */}
             <div>
               <p>Agregar posicion de la animación -- </p>
             </div>
             <div              
-           onClick={(event) => this.handlePositionClick(event)} 
+           onClick={this.handlePositionClick} 
             //onClick={(event, data) => this.handleMovUpdate(0, event)} 
             >
               <img src="/Assets/AddPos-icon.svg"/>

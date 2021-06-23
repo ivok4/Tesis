@@ -27,6 +27,15 @@ const Cards = () =>{
     fetchData();
 }, []);
 
+const handleProjectClick = (PlayID) =>{
+  console.log("click");
+  console.log(PlayID);
+  window.location.replace(`/playVideos/${PlayID}`); //go to playVideo page
+}
+const handleClick = value => () => {
+  console.log(value);
+  console.log("click");
+};
   //------------ END GET USERS PLAYS FROM DATABASE -------------
   //color de fondo de la imagen de la pelota
   //#54D7AB
@@ -35,8 +44,8 @@ const Cards = () =>{
         
              { !isLoading &&
              proyects.plays.map((play,i)  => 
-              <Container key={i}> 
-                <div className="ProyectCard" id={i}>
+              <Container key={i}  onClick={() => {handleProjectClick(i);}}> 
+                <div className="ProyectCard" id={i}  >
                   <div>
                     <img src="/Assets/Ball-img.png" />
                     <h2>Nombre</h2>

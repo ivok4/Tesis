@@ -49,7 +49,7 @@ class EdicionContainer extends React.Component {
       styleMovimientos4: [],
       components: [],
       shapes: [],
-      positions: [],
+      positions: 0,
       userId: '',
       };
   }  
@@ -193,6 +193,7 @@ createRectangulo = () => {
 
 handlePositionClick = () =>{
   console.log("poisiton click");
+  this.state.positions += 1;
   const self = this;
   let stateUpdates = {};
   this.state.components.forEach((player,i) => {
@@ -282,7 +283,6 @@ handlePositionClick = () =>{
               position={null} 
               grid={[1, 1]}
               scale={1} 
-              //onStop={(event, data) => this.handleMovUpdate(i, event)} 
               >
               <RedDot className="handle" id={i}>
                 <p>{i+1}</p>
@@ -299,7 +299,6 @@ handlePositionClick = () =>{
               </Square>
             </Draggable>)}  
                 </Court>
-                
                 <>
                 {jugada ? (
                 <ReactPlayer url={jugada.videoFile} playing={true} controls={true}  width='100%' height='100%'/>
@@ -324,8 +323,8 @@ handlePositionClick = () =>{
             <div>
               {/*<p>1</p>
                <img src="/Assets/AnimPos-icon.svg"/> */}
-               {/* {
-              positions.map((Widget, i) => <p>1</p>)}  */}
+               {
+              positions.map((Widget, i) => <p>1</p>)} 
             </div>
             <div>
               <p>Agregar posicion de la animación -- </p>

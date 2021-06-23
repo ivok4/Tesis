@@ -2,16 +2,16 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 0.2fr 3.8fr 1.5fr;
-  grid-template-rows: 1.9fr 0.1fr;
+  grid-template-columns: 100%;
+  grid-template-rows: 100% auto;
   gap: 0px 0px;
   grid-template-areas:
     ". ."
     ". .";
+    height: 93vh;
     video{
         background: url("/Assets/Backgorund-vide.jpg");
     }
-
 `
 export const Court = styled.div`
     display:flex;
@@ -19,8 +19,6 @@ export const Court = styled.div`
     background-size: cover;
     width:100%;
     height:100%;
-
-
     .tr-transform__rotator {
     top: -45px;
     left: calc(50% - 7px);

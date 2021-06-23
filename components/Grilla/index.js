@@ -166,7 +166,7 @@ function resetForm() {
      return(<>
       {!proyects.plays ? (
        <Container>
-<CreateProyectPopUp className={isActive === 'true' ? "active" : "unactive"}>
+          <CreateProyectPopUp className={isActive === 'true' ? "active" : "unactive"}>
               <div className="BlackBackground"/>
               <div className="PopUpContent">
                 <div className="PopUpTitle">
@@ -274,7 +274,7 @@ function resetForm() {
                 <p className="PlusIcon">+</p>
                 <p>Proyecto nuevo</p>
              </div>
-            <Cards/> 
+            <Cards /> 
           </Grid>
         </Container>
         )} 
