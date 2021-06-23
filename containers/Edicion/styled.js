@@ -19,8 +19,6 @@ export const Court = styled.div`
     background-size: cover;
     width:100%;
     height:100%;
-
-
     .tr-transform__rotator {
     top: -45px;
     left: calc(50% - 7px);
