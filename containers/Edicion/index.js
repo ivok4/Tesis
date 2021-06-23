@@ -322,9 +322,9 @@ handlePositionClick = () =>{
             </div>
             <div>
               {/*<p>1</p>
-               <img src="/Assets/AnimPos-icon.svg"/> */}
-               {
-              positions.map((Widget, i) => <p>1</p>)} 
+               <img src="/Assets/AnimPos-icon.svg"/> 
+               {positions.map((Widget, i) => <p>1</p>)} */}
+              <p>1</p>)
             </div>
             <div>
               <p>Agregar posicion de la animación -- </p>
