@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Navbar } from '../../components';
 import { ContainerBody } from './styled';
 
-function Layout({ children, handleLogout }) {
+function Layout({ children, handleLogout, isUser }) {
   return (
     <ContainerBody>
-      <Navbar handleLogout={handleLogout}/>
+      <Navbar handleLogout={handleLogout} isUser={isUser}/>
       {children}
        {/* <Footer /> */}
     </ContainerBody>

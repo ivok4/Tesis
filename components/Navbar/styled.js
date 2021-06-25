@@ -51,7 +51,13 @@ input[type=text] {
     img{
         width: 20%;
     }
-  
+    .active{
+  display: block;
+  overflow:scroll;
+  }
+  .unactive{
+    display: none;
+  }
 `
 
 export{Container}

@@ -4,7 +4,11 @@ import { useRouter } from 'next/router';
 import {Container} from './styled';
 
 
-const Navbar = ({handleLogout}) => {
+const Navbar = ({handleLogout, isUser}) => {
+    console.log(isUser);
+    const handleLogin =() =>{
+        window.location.replace(`/login`); //go to edicion page
+    }
     return(
         <Container>
             <a href="./">
@@ -21,7 +25,10 @@ const Navbar = ({handleLogout}) => {
             <form>
                 <input type="text" name="search" placeholder="Search.."></input> 
             </form>*/}
-                <button onClick={handleLogout}>Cerrar sesion</button>
+                <button className={isUser === 'true' ? "unactive" : "active"}
+                onClick={handleLogin}>Iniciar sesion</button>
+                <button className={isUser === 'true' ? "active" : "unactive"}
+                onClick={handleLogout}>Cerrar sesion</button>
         </Container>
     )
 }

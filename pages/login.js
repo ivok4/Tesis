@@ -62,7 +62,7 @@ const clearErrors = () =>{
   return (
     <>
        {iuser ? (
-        <Layout handleLogout={handleLogout}>
+        <Layout handleLogout={handleLogout} isUser={"true"}>
           <Grilla />
         </Layout>
       ): ( 
