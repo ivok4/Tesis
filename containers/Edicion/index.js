@@ -82,9 +82,6 @@ class EdicionContainer extends React.Component {
     });  
     console.log(positions);
   }
-  handleStop(event, data) {
-    console.log("handle stop data: "+ data)
-  }
 
 //animacion de los jugadores
  play = () => {
@@ -163,11 +160,6 @@ createRectangulo = () => {
  
 //end get userID
  handleSaveClck = () => {
-  //this.authListener;
-  // useEffect(() => {
-  //   authListener();
-  // }, []) // empty dependency array = only called on mount and unmount
-
   console.log(`este es el usuario id: ${this.props.userId}`);
   console.log(this.state.userId);
   const savePlay = [
@@ -181,8 +173,6 @@ createRectangulo = () => {
   //---------HACER PUSH DE LA JUGADA A FIREBASE-----------------
 
   var ref = firebase.database().ref(`/users/0/${this.props.userId}/plays/`);
-
-
 
   var blast = ref.child(this.props.playId); //recibe el valor de iteracion, que es igual al id del "animal" en la base de datos
         blast.update({ //actualiza la data.

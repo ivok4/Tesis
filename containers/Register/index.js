@@ -45,7 +45,7 @@ const RegisterContainer = (props) =>{
                 {/* <p>error de contraseña</p> */}
             </div>
           <button onClick={handleRegister}>
-            <a href="#"> REGISTRASE </a>
+             <a href="#"> REGISTRASE </a>
           </button>            
           </FormLogin>
         </SideContainer>

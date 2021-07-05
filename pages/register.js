@@ -10,6 +10,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
 
   const handleRegister = () =>{
+    alert("prueba registrados")
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
@@ -17,7 +18,7 @@ export default function Register() {
       console.log(user)
       setUser(user)
       setUpUserDataBase();
-      window.location.replace(`/login/`); //go to edicion page
+      alert("registrados")
       // ...
     })
     .catch((error) => {
@@ -31,7 +32,22 @@ export default function Register() {
     setEmail('');
     setPassword('');
   }
-  
+  const authListener = () =>{
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        clearInputs();
+        setUser(user);
+        window.location.replace(`/login`); //go to edicion page
+      }
+      else{
+        setUser('');        
+      }
+    })
+  }
+  useEffect(() => {
+    authListener();
+  }, [])
+
   const setUpUserDataBase = () =>{
       var ref =  firebase.database().ref(`users/0/${user.uid}`).set({ //crea la posicion del usuario en la base de datos 
         name:user.uid,
