@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import firebase from '../lib/fire';
 import { useRouter } from 'next/router'
 import {Grilla} from '../components'
+import {useAppContext} from '../contexts/Auth';
+
 
 export default function Login() {
   const [iuser, setUser] = useState('');
@@ -11,6 +13,8 @@ export default function Login() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [hasAccount, setHasAccount ] = useState(true);
+  const  userInfo  = useAppContext();
+  console.log(userInfo);
 
 const clearInputs = () =>{
   setEmail('');
@@ -43,12 +47,16 @@ const clearErrors = () =>{
   const handleLogout = () =>{
     console.log("log out");
     firebase.auth().signOut();
+    userInfo.id= null;
+    userInfo.userActive = false;
   }
   const authListener = () =>{
     firebase.auth().onAuthStateChanged(user => {
       if(user){
         clearInputs();
         setUser(user);
+        userInfo.id= user.uid;
+        userInfo.userActive = true;
       }
       else{
         setUser('');        

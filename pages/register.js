@@ -10,15 +10,13 @@ export default function Register() {
   const [password, setPassword] = useState('');
 
   const handleRegister = () =>{
-    alert("prueba registrados")
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      console.log(user)
-      setUser(user)
-      setUpUserDataBase();
-      alert("registrados")
+      //console.log(user);
+      setUser(user);
+      //setUpUserDataBase();
       // ...
     })
     .catch((error) => {
@@ -37,6 +35,7 @@ export default function Register() {
       if(user){
         clearInputs();
         setUser(user);
+        setUpUserDataBase(user);
         window.location.replace(`/login`); //go to edicion page
       }
       else{
@@ -48,7 +47,8 @@ export default function Register() {
     authListener();
   }, [])
 
-  const setUpUserDataBase = () =>{
+  const setUpUserDataBase = (user) =>{
+    console.log(user);
       var ref =  firebase.database().ref(`users/0/${user.uid}`).set({ //crea la posicion del usuario en la base de datos 
         name:user.uid,
         plays:[{}],

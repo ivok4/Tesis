@@ -117,6 +117,7 @@ export const CreateProyectPopUp = styled.div`
     background-color: #F5F7FD;
     height:70%;
     width:60%;
+    position: relative;
    }
    .PopUpTitle{
         display:flex;
@@ -180,5 +181,15 @@ export const CreateProyectPopUp = styled.div`
             }
         }
       }
+    .Loader{
+    display: none;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    color: #FFF;
+    text-align: center;
+    }
       
  `

@@ -6,7 +6,8 @@ import {Container,
 } from './styled'
 import { Cards } from '../../components';
 import firebase from '../../lib/fire';
-  
+import {useAppContext} from '../../contexts/Auth';
+
 const Grilla = () => {
 
   const [isActive, setShowPopUp] = useState('false');
@@ -19,6 +20,9 @@ const Grilla = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [proyects, setProyects] = useState([]);
   const [playID, setPlayID] = useState(0);
+  const [loader, setLoader] = useState(0);
+  const  userInfo  = useAppContext();
+  console.log(userInfo);
 
 var userId = firebase.auth().currentUser.uid;
 
@@ -89,6 +93,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
     console.log('Upload is ' + progress + '% done');
+    setLoader(progress);
     switch (snapshot.state) {
       case firebase.storage.TaskState.PAUSED: // or 'paused'
         console.log('Upload is paused');
@@ -132,7 +137,10 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       });
   });
     //onSubmit();
-    }
+    //var x = document.getElementsByClass("Loader");
+    var loaderDiv = document.getElementById("Loader").style.display = "block";
+
+}
 //console.log(proyects.plays.length);
 
 const onSubmit = () =>{
@@ -167,7 +175,7 @@ function resetForm() {
       {!proyects.plays ? (
        <Container>
           <CreateProyectPopUp className={isActive === 'true' ? "active" : "unactive"}>
-              <div className="BlackBackground"/>
+              <div className="BlackBackground"/>    
               <div className="PopUpContent">
                 <div className="PopUpTitle">
                   <h1>Nuevo ejercicio</h1>
@@ -225,6 +233,9 @@ function resetForm() {
           <CreateProyectPopUp className={isActive === 'true' ? "active" : "unactive"}>
               <div className="BlackBackground"/>
               <div className="PopUpContent">
+              <div id="Loader" className="Loader">
+                <p>Loading: {loader}%</p>
+              </div>
                 <div className="PopUpTitle">
                   <h1>Nuevo ejercicio</h1>
                   </div>
