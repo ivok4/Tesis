@@ -171,70 +171,14 @@ function resetForm() {
   setVideoUrl('');
 }
 
-     return(<>
-      {!proyects.plays ? (
-       <Container>
-          <CreateProyectPopUp className={isActive === 'true' ? "active" : "unactive"}>
-              <div className="BlackBackground"/>    
-              <div className="PopUpContent">
-                <div className="PopUpTitle">
-                  <h1>Nuevo ejercicio</h1>
-                  </div>
-                  <div className="PopUpContainer">
-                    <p>Nombre</p>
-                    <input className="inputName"
-                        onChange={e => handleChangeName(e.currentTarget.value)}
-                        />
-                    <div className="dobleSection">
-                      <div>
-                        <p>Categoría</p>
-                        <input
-                          onInput={e => handleChangeCategory(e.currentTarget.value)}
-                        />
-                      </div>
-                      <div>
-                        <p>Participantes</p>
-                        <input
-                          onInput={e => handleChangeParticipantes(e.currentTarget.value)}
-                        />
-                      </div>
-                      <div>
-                        <p>Select video</p>
-                        <label>                      
-                        <input type="file" name="video" id="files" name="files[]" />
-                        </label>
-                      </div>
-                    </div>
-                  <p>Descripción</p>
-                  <input className="inputDescription"
-                    onInput={e => handleDescripcion(e.currentTarget.value)}
-                  />
-                  <p>Objetivos</p>
-                  <input className="inputGoals"
-                    onInput={e => handleChangeGoals(e.currentTarget.value)}
-                  />
-                  <div className="buttonSection">
-                    <button onClick={handleClickExitProyect}>Atrás</button>
-                    <button onClick={uploadFile}>Siguiente</button>
-                  </div>
-                </div>
-              </div>
-            </CreateProyectPopUp>
-          <Grid>
-            <h1 className="titulo">Proyectos</h1>
-            <div className="NewProyect" onClick={handleClickNewProyect}>
-                <p className="PlusIcon">+</p>
-                <p>Proyecto nuevo</p>
-             </div>
-          </Grid>       
-          </Container>
-     ): ( 
-        <Container>  
+     return(
+     <>
+     <Container>  
           <CreateProyectPopUp className={isActive === 'true' ? "active" : "unactive"}>
               <div className="BlackBackground"/>
               <div className="PopUpContent">
               <div id="Loader" className="Loader">
-                <p>Loading: {loader}%</p>
+                <p>Cargando: {loader}%</p>
               </div>
                 <div className="PopUpTitle">
                   <h1>Nuevo ejercicio</h1>
@@ -279,16 +223,24 @@ function resetForm() {
                 </div>
               </div>
             </CreateProyectPopUp>
-          <Grid>
             <h1 className="titulo">Proyectos</h1>
+          <Grid>
+            {/* <h1 className="titulo">Proyectos</h1>
             <div className="NewProyect" onClick={handleClickNewProyect}>
                 <p className="PlusIcon">+</p>
                 <p>Proyecto nuevo</p>
+             </div>*/}
+             <div className="NewProyect" onClick={handleClickNewProyect}>
+                <p className="PlusIcon">+</p>
+                <p>Proyecto nuevo</p>
              </div>
-            <Cards /> 
+             {!proyects.plays ? ( 
+              <p>Empeza a atrabajar</p>
+             ):(
+               <Cards/>
+             )}
           </Grid>
         </Container>
-        )} 
         </>
         
     )

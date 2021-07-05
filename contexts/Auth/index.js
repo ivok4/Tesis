@@ -6,7 +6,7 @@ export function AppWrapper({ children }) {
   let sharedState = {
     userActive : false,
     user: {
-    name: 'ivo',
+    name: 'NN',
     id: null
     }
   }

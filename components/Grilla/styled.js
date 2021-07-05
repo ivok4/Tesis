@@ -5,6 +5,12 @@ export const Container = styled.div`
   display: flex;
   grid-template-rows: auto 1fr auto;
   background-color: #FFF;
+  flex-direction: column;
+  background-color: #F3F7FA;
+  h1{
+    display: block;
+    width: 100%;
+  }
   .unactive{
       display:none;
     }
@@ -14,9 +20,8 @@ export const Container = styled.div`
 `
 export const Grid = styled.div`
     display:grid;
-    background-color: #F3F7FA;
     grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 15% 35% 15% 35%;
+    grid-auto-rows: 35%;
     width:100%;
     height: 88vh;
     padding: 0 2%;
@@ -52,8 +57,9 @@ export const Grid = styled.div`
     }
     .NewProyect{
         background-color: #000;
-        width:70%;
-        height:100%;
+        width:97%;
+        height:97%;
+        margin: 2%;
         display:flex;
         flex-direction:column;
         align-items:center;
