@@ -6,7 +6,6 @@ import { Canvas } from '../../components';
 import FreeTransform from 'react-free-transform'
 import ReactPlayer from 'react-player'
 import firebase from '../../lib/fire';
-import {useAppContext} from '../../contexts/Auth'
 import {Container,
 Court,
 Sidebar,
@@ -162,7 +161,6 @@ createRectangulo = () => {
 //end get userID
  handleSaveClck = () => {
   console.log(`este es el usuario id: ${this.props.userId}`);
-  console.log(this.state.userId);
   const savePlay = [
     this.state.movimientos0,
     this.state.movimientos1,

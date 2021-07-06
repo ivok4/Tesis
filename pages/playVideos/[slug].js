@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {LayoutEdicion, VideoPlayer} from '../../containers'
 import firebase from '../../lib/fire';
-
-
+import {useAppContext} from '../../contexts/Auth'
 
 export default function Editions({slug}) {
   const [jugada, setJugada] = useState([]);
   const [usuario, setUserId] = useState();
+  const  userInfo  = useAppContext();
   let playId = slug;
 
   const authListener = () =>{
@@ -27,7 +27,6 @@ export default function Editions({slug}) {
 
  const getCollectionBySlug = async (userId) => {
    if(userId){
-    console.log(userId.uid);
     try {
       const { data } = await firebase.database().ref(`/users/0/${userId.uid}/plays/${playId}`).once('value').then((snapshot) => {
         var username = (snapshot.val())|| 'Anonymous';               

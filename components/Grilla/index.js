@@ -136,9 +136,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       });
   });
     //onSubmit();
-    //var x = document.getElementsByClass("Loader");
     var loaderDiv = document.getElementById("Loader").style.display = "block";
-
 }
 //console.log(proyects.plays.length);
 
@@ -224,11 +222,6 @@ function resetForm() {
             </CreateProyectPopUp>
             <h1 className="titulo">Proyectos</h1>
           <Grid>
-            {/* <h1 className="titulo">Proyectos</h1>
-            <div className="NewProyect" onClick={handleClickNewProyect}>
-                <p className="PlusIcon">+</p>
-                <p>Proyecto nuevo</p>
-             </div>*/}
              <div className="NewProyect" onClick={handleClickNewProyect}>
                 <p className="PlusIcon">+</p>
                 <p>Proyecto nuevo</p>

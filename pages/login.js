@@ -59,7 +59,7 @@ const clearErrors = () =>{
         userInfo.userActive = true;
       }
       else{
-        setUser('');        
+        setUser('');    
       }
     })
   }

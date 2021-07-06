@@ -18,7 +18,7 @@ const Navbar = ({handleLogout}) => {
             <ul>
                 <li><a href="./login">Proyectos</a></li>
                 <li><a href="./ediciones">Ediciones</a></li>
-                <li><a href="./login">Libreria</a></li>
+                <li><a href="./libreria">Libreria</a></li>
                 <li><a href="#">Configuracion</a></li>
             </ul>
                 <button className={userInfo.userActive === true ? "unactive" : "active"}

@@ -3,13 +3,13 @@ import React from "react";
 import {useAppContext} from '../contexts/Auth'
 
 
-export default function cuatro0cuatro() {
+export default function libreria() {
   const  userInfo  = useAppContext();
   console.log(userInfo);
   return (
     <>
     <Layout>
-      404
+      Libreria
     </Layout>
     </>
   )
