@@ -1,19 +1,20 @@
 import { Container } from './styled'
 import React, { useState, useEffect } from "react";
 import firebase from '../../lib/fire';
+import {useAppContext} from '../../contexts/Auth';
 
 const Cards = () =>{
   
   const [proyects, setProyects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  var userId = firebase.auth().currentUser.uid;
+  const  userInfo  = useAppContext();
 
 
   //------------ GET USERS PLAYS FROM DATABASE -------------
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const { data } = await firebase.database().ref('/users/0/' + userId).once('value').then((snapshot) => {
+            const { data } = await firebase.database().ref(`/users/0/${userInfo.id}`).once('value').then((snapshot) => {
               var username = (snapshot.val())|| 'Anonymous';               
               setProyects(username);
               setIsLoading(false);

@@ -6,6 +6,7 @@ import { Canvas } from '../../components';
 import FreeTransform from 'react-free-transform'
 import ReactPlayer from 'react-player'
 import firebase from '../../lib/fire';
+import {useAppContext} from '../../contexts/Auth'
 import {Container,
 Court,
 Sidebar,
@@ -31,7 +32,6 @@ onStop={(event, data) => this.handleStop(1, event)}
 </Draggable> ;
 
  const SquareShape = () =>   <div class="resize both">Resize me!</div>
-
 
 class EdicionContainer extends React.Component {
   constructor(props) {
@@ -63,6 +63,7 @@ class EdicionContainer extends React.Component {
     }else{
       alert("no more players"); 
     }  
+    
   }
 
   renderSquare() {

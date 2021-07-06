@@ -14,10 +14,6 @@ const NavbarEdicion = () => {
             posy:200,
         },
     ]
-       
-      
-
-   
     return(
         <Container>
             <Navbar>

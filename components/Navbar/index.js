@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import firebase from '../../lib/fire';
 import { useRouter } from 'next/router';
 import {Container} from './styled';
+import {useAppContext} from '../../contexts/Auth';
 
 
-const Navbar = ({handleLogout, isUser}) => {
-    console.log(isUser);
+const Navbar = ({handleLogout}) => {
+    const  userInfo  = useAppContext();
     const handleLogin =() =>{
         window.location.replace(`/login`); //go to edicion page
     }
@@ -20,14 +21,9 @@ const Navbar = ({handleLogout, isUser}) => {
                 <li><a href="./login">Libreria</a></li>
                 <li><a href="#">Configuracion</a></li>
             </ul>
-            {/* cambir por un buscador propio 
-
-            <form>
-                <input type="text" name="search" placeholder="Search.."></input> 
-            </form>*/}
-                <button className={isUser === 'true' ? "unactive" : "active"}
+                <button className={userInfo.userActive === true ? "unactive" : "active"}
                 onClick={handleLogin}>Iniciar sesion</button>
-                <button className={isUser === 'true' ? "active" : "unactive"}
+                <button className={userInfo.userActive === true ? "active" : "unactive"}
                 onClick={handleLogout}>Cerrar sesion</button>
         </Container>
     )

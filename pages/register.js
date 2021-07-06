@@ -14,15 +14,11 @@ export default function Register() {
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      //console.log(user);
       setUser(user);
-      //setUpUserDataBase();
-      // ...
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      // ..
     });  
   }
 
@@ -48,7 +44,6 @@ export default function Register() {
   }, [])
 
   const setUpUserDataBase = (user) =>{
-    console.log(user);
       var ref =  firebase.database().ref(`users/0/${user.uid}`).set({ //crea la posicion del usuario en la base de datos 
         name:user.uid,
         plays:[{}],

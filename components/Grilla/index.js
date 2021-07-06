@@ -24,7 +24,6 @@ const Grilla = () => {
   const  userInfo  = useAppContext();
   console.log(userInfo);
 
-var userId = firebase.auth().currentUser.uid;
 
 //HANDLE INPUTS DATA
 const handleClickNewProyect = () =>{
@@ -57,7 +56,7 @@ const handleChangeGoals = (value) =>{
 useEffect(() => {
       const fetchData = async () => {
           try {
-              const { data } = await firebase.database().ref('/users/0/' + userId).once('value').then((snapshot) => {
+              const { data } = await firebase.database().ref('/users/0/' + userInfo.id).once('value').then((snapshot) => {
                 var username = (snapshot.val())|| 'Anonymous';               
                 setProyects(username);
                 setIsLoading(false);
@@ -124,7 +123,7 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
     else PlayID= 0;
     uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
       console.log('File available at', downloadURL);
-      firebase.database().ref(`/users/0/${userId}/plays/${PlayID}`).set({  //actualiza la data.  
+      firebase.database().ref(`/users/0/${userInfo.id}/plays/${PlayID}`).set({  //actualiza la data.  
         name: name,
       category: category,
       participantes : participantes,
@@ -148,7 +147,7 @@ const onSubmit = () =>{
   setPlayID(PlayID) ;
   //console.log(PlayID);
   //hace push de la jugada
-    firebase.database().ref(`/users/0/${userId}/plays/${PlayID}`).set({  //actualiza la data.  
+    firebase.database().ref(`/users/0/${userInfo.id}/plays/${PlayID}`).set({  //actualiza la data.  
       name: name,
       category: category,
       participantes : participantes,
