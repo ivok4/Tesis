@@ -13,7 +13,8 @@ RedDot,
 AnimatorBar,
 Square,
 Navbar,
-SectorNav
+SectorNav,
+BallDot
 } from './styled'
 
 
@@ -28,6 +29,19 @@ onStop={(event, data) => this.handleStop(1, event)}
 <RedDot className="handle">
   <p>{i}</p>
 </RedDot>          
+</Draggable> ;
+
+const BallWidget = () => <Draggable
+id="Ball"
+handle=".handle"
+defaultPosition={{x: 0, y: 0}}
+grid={[1, 1]}
+scale={1}
+onStop={(event, data) => this.handleStop(1, event)} 
+>
+<Ball className="handle">
+  <p>Ball</p>
+</Ball>          
 </Draggable> ;
 
  const SquareShape = () =>   <div class="resize both">Resize me!</div>
@@ -48,6 +62,7 @@ class EdicionContainer extends React.Component {
       styleMovimientos4: [],
       components: [],
       shapes: [],
+      Ball:[],
       positions: 0,
       userId: '',
       };
@@ -64,6 +79,18 @@ class EdicionContainer extends React.Component {
     }  
     
   }
+  renderBall() {
+    console.log("Ball was clicked");
+    if(this.state.Ball.length < 1){
+      const newComponents = [...this.state.Ball, BallWidget];
+      this.setState({
+        Ball: newComponents
+      });
+      }else{
+        alert("no more balls"); 
+      }  
+  }
+
 
   renderSquare() {
     console.log("Square was clicked");
@@ -221,7 +248,7 @@ handlePositionClick = () =>{
   }
 
    render(){
-    const { components, shapes} = this.state; 
+    const { components, shapes, Ball} = this.state; 
     const jugada = this.props.jugada;
     console.log(jugada);
     return(
@@ -251,9 +278,9 @@ handlePositionClick = () =>{
               <img src="/Assets/Player-icon.png" />
             </div>
             <div
-            onClick={this.createPlayer}
+            onClick={this.renderBall.bind(this)}
             >
-              <img src="/Assets/Ball-icon.png" />
+              <img src="/Assets/Ball-icon.png"/>
             </div>
             <div>
               <img src="/Assets/Line-icon.png" /> 
@@ -287,6 +314,20 @@ handlePositionClick = () =>{
                 <div className="tr-transform__scale-point--br"></div>
               </Square>
             </Draggable>)}  
+            {Ball.length !== 0 &&
+            Ball.map((BallShape, i) => <Draggable
+            id="0"
+            handle=".handle"
+            defaultPosition={{x: 0, y: 0}}
+            position={null} 
+            grid={[1, 1]}
+            scale={1} 
+            >
+            <BallDot className="handle" id={i}>
+              
+            </BallDot>          
+          </Draggable>
+            )}  
                 </Court>
                 <>
                 {jugada ? (

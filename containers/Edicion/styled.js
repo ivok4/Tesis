@@ -187,6 +187,15 @@ export const RedDot = styled.div`
     font-size: 20px;
     text-align: center;
 `
+export const BallDot = styled.div`
+    height:50px;
+    width:50px;
+    border-radius:50px;
+    color:#FFF;
+    font-size: 20px;
+    text-align: center;
+    background: url("/Assets/Ball.png"); 
+`
 export const AnimatorBar = styled.div`
     height:100%;
     width:100%;

@@ -4,12 +4,13 @@ const Container = styled.div`
 background-color: #000;
 border-radius:10%;
 margin:2%;
-
 .ProyectCard{
     color: #FFF;
     width:100%;
     height:100%;
     display:block;
+    overflow:scroll;
+    padding: 1rem;
     img{
     width:40%;
     height:100px;

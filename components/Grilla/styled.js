@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  min-height: 80vh;
+  height: 100%;
   display: flex;
   grid-template-rows: auto 1fr auto;
   background-color: #FFF;
@@ -21,9 +21,9 @@ export const Container = styled.div`
 export const Grid = styled.div`
     display:grid;
     grid-template-columns: 25% 25% 25% 25%;
-    grid-auto-rows: 35%;
+    grid-auto-rows: 40%;
     width:100%;
-    height: 88vh;
+    height: 100%;
     padding: 0 2%;
     .titulo{
         grid-column: 1 / span 4;
@@ -99,7 +99,7 @@ export const Sidebar = styled.div`
 
 
 export const CreateProyectPopUp = styled.div`
-   min-height: 88vh;
+   height: 100%;
    width:100%;
    position:absolute;
    grid-template-rows: auto 1fr auto;
@@ -107,7 +107,7 @@ export const CreateProyectPopUp = styled.div`
    align-content:center;
    .BlackBackground{
     width:100%;
-    height: 88vh;
+    height: 100%;
    display: flex;
    position:absolute;
    grid-template-rows: auto 1fr auto;
