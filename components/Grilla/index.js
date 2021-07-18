@@ -21,8 +21,9 @@ const Grilla = () => {
   const [proyects, setProyects] = useState([]);
   const [playID, setPlayID] = useState(0);
   const [loader, setLoader] = useState(0);
+  const [fileSize, setFileSize] = useState(0);
   const  userInfo  = useAppContext();
-  console.log(userInfo);
+  //console.log(userInfo);
 
 
 //HANDLE INPUTS DATA
@@ -84,9 +85,10 @@ var mountainImagesRef = storageRef.child('file.mp4');
 
 //get the input file.
 var file = document.getElementById('files').files[0];
+console.log(file);
 //uploade the input file.
 var uploadTask = storageRef.child(`${name}.mp4`).put(file, file);
-
+if(fileSize <= 15){
 uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
   function(snapshot) {
     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
@@ -138,12 +140,26 @@ uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
     //onSubmit();
     var loaderDiv = document.getElementById("Loader").style.display = "block";
 }
+else{
+  alert("nope");
+  var errorMessage = document.getElementById("FileError").style.display = "block";
+  }
+}
 //console.log(proyects.plays.length);
-
+const checkFileSize = () => {
+  var file = document.getElementById('files').files[0];
+  console.log(file.size);
+  let fileSize = parseInt(file.size);
+  let fileSizeMB = Math.round((fileSize * 0.000001));
+  console.log(fileSizeMB);
+  // if(fileSizeMB > 15){
+  //   alert("to big of file man!");
+  // }
+  setFileSize(fileSizeMB);
+}
 const onSubmit = () =>{
   var PlayID = proyects.plays.length;
   setPlayID(PlayID) ;
-  //console.log(PlayID);
   //hace push de la jugada
     firebase.database().ref(`/users/0/${userInfo.id}/plays/${PlayID}`).set({  //actualiza la data.  
       name: name,
@@ -201,7 +217,9 @@ function resetForm() {
                       <div>
                         <p>Select video</p>
                         <label>                      
-                        <input type="file" name="video" id="files" name="files[]" />
+                        <input type="file" name="video" id="files" name="files[]" 
+                        onChange={checkFileSize}/>
+                        <p id="FileError" style={{ display: 'none', color:'red' }}>*File should be 15MB or less</p>
                         </label>
                       </div>
                     </div>
