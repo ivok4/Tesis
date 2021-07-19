@@ -12,7 +12,7 @@ const Navbar = ({handleLogout}) => {
     }
     return(
         <Container>
-            <a href="./">
+            <a href="/">
                 <img src="/Assets/Logo.png"/>
             </a>
             <ul>

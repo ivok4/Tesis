@@ -14,7 +14,8 @@ AnimatorBar,
 Square,
 Navbar,
 SectorNav,
-BallDot
+BallDot,
+BlueDot
 } from './styled'
 
 
@@ -30,6 +31,21 @@ onStop={(event, data) => this.handleStop(1, event)}
   <p>{i}</p>
 </RedDot>          
 </Draggable> ;
+
+
+const rivalWidget = () => <Draggable
+id="0"
+handle=".handle"
+defaultPosition={{x: 0, y: 0}}
+grid={[1, 1]}
+scale={1}
+onStop={(event, data) => this.handleStop(1, event)}
+>
+<RedDot className="handle">
+  <p>{i}</p>
+</RedDot>          
+</Draggable> ;
+
 
 const BallWidget = () => <Draggable
 id="Ball"
@@ -60,7 +76,8 @@ class EdicionContainer extends React.Component {
       styleMovimientos2: [],
       styleMovimientos3: [],
       styleMovimientos4: [],
-      components: [],
+      ownPlayers: [],
+      rivalPlayers:[],
       shapes: [],
       Ball:[],
       positions: 0,
@@ -68,11 +85,22 @@ class EdicionContainer extends React.Component {
       };
   }  
   
-  renderWidget() {
-    if(this.state.components.length < 5){
-    const newComponents = [...this.state.components, Widget];
+  renderPlayer() {
+    if(this.state.ownPlayers.length < 5){
+    const newComponents = [...this.state.ownPlayers, Widget];
     this.setState({
-      components: newComponents
+      ownPlayers: newComponents
+    });
+    }else{
+      alert("no more players"); 
+    }  
+    
+  }
+  renderRivalPlayer() {
+    if(this.state.rivalPlayers.length < 5){
+    const newComponents = [...this.state.rivalPlayers, rivalWidget];
+    this.setState({
+      rivalPlayers: newComponents
     });
     }else{
       alert("no more players"); 
@@ -248,7 +276,7 @@ handlePositionClick = () =>{
   }
 
    render(){
-    const { components, shapes, Ball} = this.state; 
+    const { ownPlayers, rivalPlayers, shapes, Ball} = this.state; 
     const jugada = this.props.jugada;
     console.log(jugada);
     return(
@@ -273,7 +301,12 @@ handlePositionClick = () =>{
         <Container>
           <Sidebar>
             <div
-            onClick={this.renderWidget.bind(this)}
+            onClick={this.renderPlayer.bind(this)}
+            >
+              <img src="/Assets/Player-icon.png" />
+            </div>
+            <div
+            onClick={this.renderRivalPlayer.bind(this)}
             >
               <img src="/Assets/Player-icon.png" />
             </div>
@@ -291,8 +324,8 @@ handlePositionClick = () =>{
           </Sidebar> 
          
           <Court>
-              {components.length !== 0 &&
-              components.map((Widget, i) => <Draggable
+              {ownPlayers.length !== 0 &&
+              ownPlayers.map((Widget, i) => <Draggable
               id="0"
               handle=".handle"
               defaultPosition={{x: 0, y: 0}}
@@ -303,6 +336,20 @@ handlePositionClick = () =>{
               <RedDot className="handle" id={i}>
                 <p>{i+1}</p>
               </RedDot>          
+            </Draggable>
+            )}
+            {rivalPlayers.length !== 0 &&
+              rivalPlayers.map((Widget, i) => <Draggable
+              id="0"
+              handle=".handle"
+              defaultPosition={{x: 0, y: 0}}
+              position={null} 
+              grid={[1, 1]}
+              scale={1} 
+              >
+              <BlueDot className="handle" id={i}>
+                <p>{i+1}</p>
+              </BlueDot>          
             </Draggable>
             )}
             {shapes.length !== 0 &&

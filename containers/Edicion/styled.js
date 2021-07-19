@@ -187,6 +187,15 @@ export const RedDot = styled.div`
     font-size: 20px;
     text-align: center;
 `
+export const BlueDot = styled.div`
+    height:50px;
+    width:50px;
+    border-radius:50px;
+    background-color:blue;
+    color:#FFF;
+    font-size: 20px;
+    text-align: center;
+`
 export const BallDot = styled.div`
     height:50px;
     width:50px;
