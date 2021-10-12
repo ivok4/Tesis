@@ -328,8 +328,37 @@ handlePositionClick = () =>{
               case 4:
                 this.setState({movimientos4: [...this.state.movimientos4, stateUpdates]});
                   break;    
-              case 5:
-                this.setState({movimientosB0: [...this.state.movimientosB0, stateUpdates]});
+              default:
+                  break;
+          }  
+  });
+
+  this.state.rivalPlayers.forEach((player,i) => {
+    var player = document.getElementById(`b-${i}`);
+    var style = window.getComputedStyle(player);
+    var matrix = new WebKitCSSMatrix(style.transform);
+    let posy = matrix.f;
+    let posx = matrix.m41;
+    stateUpdates = {posy,posx}
+    console.log('translateX: ', matrix.m41);
+    console.log('translateY: ', matrix.f);
+    //guardar las posiciones en el state  
+    //self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
+          switch (i) {
+              case 0:
+                self.setState({movimientosB0: [...self.state.movimientosB0, stateUpdates]}); 
+              break;
+              case 1:
+                this.setState({movimientosB1: [...this.state.movimientosB1, stateUpdates]});
+                break;
+              case 2:
+                this.setState({movimientosB2: [...this.state.movimientosB2, stateUpdates]});
+                  break;
+              case 3:
+                this.setState({movimientosB3: [...this.state.movimientosB3, stateUpdates]});
+                  break;
+              case 4:
+                this.setState({movimientosB4: [...this.state.movimientosB4, stateUpdates]});
                   break;    
               default:
                   break;
