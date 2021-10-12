@@ -76,6 +76,12 @@ class EdicionContainer extends React.Component {
       styleMovimientos2: [],
       styleMovimientos3: [],
       styleMovimientos4: [],
+      movimientosB0:[],
+      movimientosB1:[],
+      movimientosB2:[],
+      movimientosB3:[],
+      movimientosB4:[],
+      movimientosBall:[],
       ownPlayers: [],
       rivalPlayers:[],
       shapes: [],
@@ -147,6 +153,13 @@ class EdicionContainer extends React.Component {
   var player2 = document.getElementById("2");
   var player3 = document.getElementById("3");
   var player4 = document.getElementById("4");
+  var rival0 = document.getElementById("b-0");
+  var rival1 = document.getElementById("b-1");
+  var rival2 = document.getElementById("b-2");
+  var rival3 = document.getElementById("b-3");
+  var rival4 = document.getElementById("b-4");
+  var ball = document.getElementById("Ball");
+
 
   this.state.movimientos0.forEach((movimiento,index) => {
       setTimeout(() => {
@@ -189,6 +202,48 @@ this.state.movimientos4.forEach((movimiento,index) => {
       player4.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
     }, intervaloMov * (index + 1));
 });  
+this.state.movimientosB0.forEach((movimiento,index) => {
+  setTimeout(() => {
+      console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      rival0.style.transition= "transform 0.5s linear";
+      rival0.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+    }, intervaloMov * (index + 1));
+});  
+this.state.movimientosB1.forEach((movimiento,index) => {
+  setTimeout(() => {
+      console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      rival1.style.transition= "transform 0.5s linear";
+      rival1.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+    }, intervaloMov * (index + 1));
+}); 
+this.state.movimientosB2.forEach((movimiento,index) => {
+  setTimeout(() => {
+      console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      rival2.style.transition= "transform 0.5s linear";
+      rival2.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+    }, intervaloMov * (index + 1));
+}); 
+this.state.movimientosB3.forEach((movimiento,index) => {
+  setTimeout(() => {
+      console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      rival3.style.transition= "transform 0.5s linear";
+      rival3.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+    }, intervaloMov * (index + 1));
+}); 
+this.state.movimientosB4.forEach((movimiento,index) => {
+  setTimeout(() => {
+      console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      rival4.style.transition= "transform 0.5s linear";
+      rival4.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+    }, intervaloMov * (index + 1));
+});
+this.state.movimientosBall.forEach((movimiento,index) => {
+  setTimeout(() => {
+      console.log("4 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
+      ball.style.transition= "transform 0.5s linear";
+      ball.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+    }, intervaloMov * (index + 1));
+});  
 }
 //fin de la animacion de los jugadores
 
@@ -221,7 +276,13 @@ createRectangulo = () => {
     this.state.movimientos1,
     this.state.movimientos2,
     this.state.movimientos3,
-    this.state.movimientos4
+    this.state.movimientos4,
+    this.state.movimientosB0,
+    this.state.movimientosB1,
+    this.state.movimientosB2,
+    this.state.movimientosB3,
+    this.state.movimientosB4,
+    this.state.movimientosBall
   ]
   console.log(savePlay);
   //---------HACER PUSH DE LA JUGADA A FIREBASE-----------------
@@ -240,7 +301,7 @@ handlePositionClick = () =>{
   this.state.positions += 1;
   const self = this;
   let stateUpdates = {};
-  this.state.components.forEach((player,i) => {
+  this.state.ownPlayers.forEach((player,i) => {
     var player = document.getElementById(i);
     var style = window.getComputedStyle(player);
     var matrix = new WebKitCSSMatrix(style.transform);
@@ -253,7 +314,7 @@ handlePositionClick = () =>{
     //self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
           switch (i) {
               case 0:
-                self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]});
+                self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
               break;
               case 1:
                 this.setState({movimientos1: [...this.state.movimientos1, stateUpdates]});
@@ -266,12 +327,33 @@ handlePositionClick = () =>{
                   break;
               case 4:
                 this.setState({movimientos4: [...this.state.movimientos4, stateUpdates]});
-                  break;       
+                  break;    
+              case 5:
+                this.setState({movimientosB0: [...this.state.movimientosB0, stateUpdates]});
+                  break;    
               default:
                   break;
           }  
   });
-  console.log(this.state.movimientos0);
+  
+  this.state.Ball.forEach((ballmovement,i) => {
+    var ball = document.getElementById("Ball");
+    var style = window.getComputedStyle(ball);
+    var matrix = new WebKitCSSMatrix(style.transform);
+    let posy = matrix.f;
+    let posx = matrix.m41;
+    stateUpdates = {posy,posx}
+    console.log('translateX: ', matrix.m41);
+    console.log('translateY: ', matrix.f);
+          switch (i) {
+              case 0:
+                self.setState({movimientosBall: [...self.state.movimientosBall, stateUpdates]}); 
+              break;     
+              default:
+                  break;
+          }  
+  });
+  console.log(this.state.movimientosBall);
   console.log(stateUpdates);
   }
 
@@ -347,7 +429,7 @@ handlePositionClick = () =>{
               grid={[1, 1]}
               scale={1} 
               >
-              <BlueDot className="handle" id={i}>
+              <BlueDot className="handle" id={`b-${i}`}>
                 <p>{i+1}</p>
               </BlueDot>          
             </Draggable>
@@ -363,15 +445,14 @@ handlePositionClick = () =>{
             </Draggable>)}  
             {Ball.length !== 0 &&
             Ball.map((BallShape, i) => <Draggable
-            id="0"
+            id="Ball"
             handle=".handle"
             defaultPosition={{x: 0, y: 0}}
             position={null} 
             grid={[1, 1]}
             scale={1} 
             >
-            <BallDot className="handle" id={i}>
-              
+            <BallDot className="handle" id="Ball">
             </BallDot>          
           </Draggable>
             )}  
