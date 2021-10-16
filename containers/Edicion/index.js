@@ -271,27 +271,50 @@ createRectangulo = () => {
 //end get userID
  handleSaveClck = () => {
   console.log(`este es el usuario id: ${this.props.userId}`);
-  const savePlay = [
+  // const savePlay = [
+  //   this.state.movimientos0,
+  //   this.state.movimientos1,
+  //   this.state.movimientos2,
+  //   this.state.movimientos3,
+  //   this.state.movimientos4,
+  //   this.state.movimientosB0,
+  //   this.state.movimientosB1,
+  //   this.state.movimientosB2,
+  //   this.state.movimientosB3,
+  //   this.state.movimientosB4,
+  //   this.state.movimientosBall
+  // ]
+  const own = [
     this.state.movimientos0,
     this.state.movimientos1,
     this.state.movimientos2,
     this.state.movimientos3,
-    this.state.movimientos4,
+    this.state.movimientos4
+  ]
+  const rivals = [
     this.state.movimientosB0,
     this.state.movimientosB1,
     this.state.movimientosB2,
     this.state.movimientosB3,
-    this.state.movimientosB4,
+    this.state.movimientosB4
+  ]
+  const ball = [
     this.state.movimientosBall
   ]
-  console.log(savePlay);
+  //console.log(savePlay);
   //---------HACER PUSH DE LA JUGADA A FIREBASE-----------------
 
   var ref = firebase.database().ref(`/users/0/${this.props.userId}/plays/`);
 
   var blast = ref.child(this.props.playId); //recibe el valor de iteracion, que es igual al id del "animal" en la base de datos
         blast.update({ //actualiza la data.
-          "animations": savePlay
+          //"animations": savePlay
+          animations : [{
+          "own": own,
+          "rivals": rivals,
+          "ball" : ball
+        }
+        ] 
         });
 }
 
