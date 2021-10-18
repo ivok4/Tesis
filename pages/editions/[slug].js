@@ -7,7 +7,7 @@ export default function Editions({slug}) {
   const [jugada, setJugada] = useState([]);
   const [usuario, setUserId] = useState();
   const  userInfo  = useAppContext();
-  console.log(userInfo);
+  //console.log(userInfo);
   let playId = slug;
 
   const authListener = () =>{

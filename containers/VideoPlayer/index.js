@@ -30,7 +30,7 @@ export default function VideoPlayer(jugadaData) {
     description,
     animations
   } = jugadaData.jugada;
-  //console.log(animations);
+  //console.log(animations[0]);
 
   useEffect(() => {
     getPlayers();
@@ -38,9 +38,11 @@ export default function VideoPlayer(jugadaData) {
 
  const getPlayers = () =>{
    if(animations){
-  animations.forEach(function (user,i) {
+      animations.own.forEach(function (user,i) {
     var node = document.createElement("div");
+    var playerNumber = document.createElement("p");
     var playerCreator = document.getElementById("Court").appendChild(node);
+    node.appendChild(playerNumber).innerHTML= i +1;
     node.setAttribute('id',i);
     node.style.backgroundColor = "#C4342C";
     node.style.height = "50px";
@@ -50,7 +52,35 @@ export default function VideoPlayer(jugadaData) {
     node.style.fontSize = "20px";
     node.style.textAlign = "center";
     node.style.transform = `translate(${user[0].posx}px, ${user[0].posy}px)`;
-    //console.log(user[0].posx);
+  });
+  animations.rivals.forEach(function (user,i) {
+    var node = document.createElement("div");
+    var playerNumber = document.createElement("p");
+    var playerCreator = document.getElementById("Court").appendChild(node);
+    node.appendChild(playerNumber).innerHTML= i +1;
+    node.setAttribute('id',`b-${i}`);
+    node.style.backgroundColor = "blue";
+    node.style.height = "50px";
+    node.style.width = "50px";
+    node.style.borderRadius = "50px";
+    node.style.color = "#FFF";
+    node.style.fontSize = "20px";
+    node.style.textAlign = "center";
+    node.style.transform = `translate(${user[0].posx}px, ${user[0].posy}px)`;
+
+  });
+  animations.ball.forEach(function (user,i) {
+    var node = document.createElement("div");
+    var playerCreator = document.getElementById("Court").appendChild(node);
+    node.setAttribute('id',"ball");
+    node.style.backgroundImage= "url('/Assets/Ball.png')"; 
+    node.style.height = "50px";
+    node.style.width = "50px";
+    node.style.borderRadius = "50px";
+    node.style.color = "#FFF";
+    node.style.fontSize = "20px";
+    node.style.textAlign = "center";
+    node.style.transform = `translate(${user[0].posx}px, ${user[0].posy}px)`;
   });
 }
 }
@@ -59,29 +89,35 @@ export default function VideoPlayer(jugadaData) {
  const play = () => {
   const intervaloMov = 1000;
   console.log('--------Play mode!-------')
-  var player0 = document.getElementById("0");
-  var player1 = document.getElementById("1");
-  var player2 = document.getElementById("2");
-  var player3 = document.getElementById("3");
-  var player4 = document.getElementById("4");
 
-console.log(`las animaciones ${animations.length}`);
-
-for(let i = 0; i < animations.length; i++){
-  console.log("prueba");
-  console.log(i);
-  animations[i].forEach((movimiento,index) => {
-    var player = document.getElementById(i);
+for(let i = 0; i < animations.rivals.length; i++){
+  animations.rivals[i].forEach((movimiento,index) => {
+    var player = document.getElementById(`b-${i}`); 
     console.log("prueba 2");
       setTimeout(() => {
-        console.log("prueba 3");
-          console.log("0 === POS X: ", movimiento.posx, "POS Y", movimiento.posy );
           player.style.transition= "transform 0.5s linear";
           player.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
         }, intervaloMov * (index + 1));
   });
 }
-
+for(let i = 0; i < animations.own.length; i++){
+  animations.own[i].forEach((movimiento,index) => {
+    var player = document.getElementById(i);
+      setTimeout(() => {
+          player.style.transition= "transform 0.5s linear";
+          player.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+        }, intervaloMov * (index + 1));
+  });
+}
+for(let i = 0; i < animations.ball.length; i++){
+  animations.ball[i].forEach((movimiento,index) => {
+    var player = document.getElementById("ball");
+      setTimeout(() => {
+          player.style.transition= "transform 0.5s linear";
+          player.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+        }, intervaloMov * (index + 1));
+  });
+}
 }
 //fin de la animacion de los jugadores
 

@@ -309,12 +309,12 @@ createRectangulo = () => {
   var blast = ref.child(this.props.playId); //recibe el valor de iteracion, que es igual al id del "animal" en la base de datos
         blast.update({ //actualiza la data.
           //"animations": savePlay
-          animations : [{
+          animations : {
           "own": own,
           "rivals": rivals,
           "ball" : ball
         }
-        ] 
+        
         });
 }
 
@@ -405,14 +405,14 @@ handlePositionClick = () =>{
                   break;
           }  
   });
-  console.log(this.state.movimientosBall);
-  console.log(stateUpdates);
+  //console.log(this.state.movimientosBall);
+  //console.log(stateUpdates);
   }
 
    render(){
     const { ownPlayers, rivalPlayers, shapes, Ball} = this.state; 
     const jugada = this.props.jugada;
-    console.log(jugada);
+    //console.log(jugada);
     return(
       <>
       <Navbar>
