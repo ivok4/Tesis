@@ -47,7 +47,7 @@ export default function Editions({slug}) {
 
 export async function getServerSideProps({ res, params }) {
   const { slug } = params;
-  const data = slug;
+  //const data = slug;
   return { props: {slug} }
 }
 

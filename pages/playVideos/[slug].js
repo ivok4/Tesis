@@ -8,6 +8,7 @@ export default function Editions({slug}) {
   const [usuario, setUserId] = useState();
   const  userInfo  = useAppContext();
   let playId = slug;
+  console.log(playId);
 
   const authListener = () =>{
     firebase.auth().onAuthStateChanged(user => {

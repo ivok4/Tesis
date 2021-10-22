@@ -38,21 +38,24 @@ export default function VideoPlayer(jugadaData) {
 
  const getPlayers = () =>{
    if(animations){
+    if(animations.own){
       animations.own.forEach(function (user,i) {
-    var node = document.createElement("div");
-    var playerNumber = document.createElement("p");
-    var playerCreator = document.getElementById("Court").appendChild(node);
-    node.appendChild(playerNumber).innerHTML= i +1;
-    node.setAttribute('id',i);
-    node.style.backgroundColor = "#C4342C";
-    node.style.height = "50px";
-    node.style.width = "50px";
-    node.style.borderRadius = "50px";
-    node.style.color = "#FFF";
-    node.style.fontSize = "20px";
-    node.style.textAlign = "center";
-    node.style.transform = `translate(${user[0].posx}px, ${user[0].posy}px)`;
-  });
+        var node = document.createElement("div");
+        var playerNumber = document.createElement("p");
+        var playerCreator = document.getElementById("Court").appendChild(node);
+        node.appendChild(playerNumber).innerHTML= i +1;
+        node.setAttribute('id',i);
+        node.style.backgroundColor = "#C4342C";
+        node.style.height = "50px";
+        node.style.width = "50px";
+        node.style.borderRadius = "50px";
+        node.style.color = "#FFF";
+        node.style.fontSize = "20px";
+        node.style.textAlign = "center";
+        node.style.transform = `translate(${user[0].posx}px, ${user[0].posy}px)`;
+      });
+    }
+      if(animations.rivals){
   animations.rivals.forEach(function (user,i) {
     var node = document.createElement("div");
     var playerNumber = document.createElement("p");
@@ -67,8 +70,9 @@ export default function VideoPlayer(jugadaData) {
     node.style.fontSize = "20px";
     node.style.textAlign = "center";
     node.style.transform = `translate(${user[0].posx}px, ${user[0].posy}px)`;
-
   });
+      }
+  if(animations.ball){
   animations.ball.forEach(function (user,i) {
     var node = document.createElement("div");
     var playerCreator = document.getElementById("Court").appendChild(node);
@@ -84,22 +88,23 @@ export default function VideoPlayer(jugadaData) {
   });
 }
 }
+}
 
 //animacion de los jugadores
  const play = () => {
   const intervaloMov = 1000;
-  console.log('--------Play mode!-------')
+  console.log('--------Play mode!-------');
 
-for(let i = 0; i < animations.rivals.length; i++){
-  animations.rivals[i].forEach((movimiento,index) => {
-    var player = document.getElementById(`b-${i}`); 
-    console.log("prueba 2");
-      setTimeout(() => {
-          player.style.transition= "transform 0.5s linear";
-          player.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
-        }, intervaloMov * (index + 1));
-  });
-}
+// for(let i = 0; i < animations.rivals.length; i++){
+//   animations.rivals[i].forEach((movimiento,index) => {
+//     var player = document.getElementById(`b-${i}`); 
+//     console.log("prueba 2");
+//       setTimeout(() => {
+//           player.style.transition= "transform 0.5s linear";
+//           player.style.transform = "translate("+movimiento.posx+"px, "+ movimiento.posy+"px)";
+//         }, intervaloMov * (index + 1));
+//   });
+// }
 for(let i = 0; i < animations.own.length; i++){
   animations.own[i].forEach((movimiento,index) => {
     var player = document.getElementById(i);

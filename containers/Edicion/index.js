@@ -314,7 +314,6 @@ createRectangulo = () => {
           "rivals": rivals,
           "ball" : ball
         }
-        
         });
 }
 
