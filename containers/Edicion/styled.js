@@ -206,31 +206,57 @@ export const BallDot = styled.div`
     background: url("/Assets/Ball.png"); 
 `
 export const AnimatorBar = styled.div`
-    height:100%;
-    width:100%;
-    display:flex;
-    flex-direction:row;
+    display: grid;
+    grid-template-columns: 8% 6% 6% 6% 43% 25% 6%;
     color:#FFF;
-    div{
-        width:50px;
+    #positions-container{ 
+        width:30vw;
+        max-width: 45%;
+        overflow: scroll;
+        background-color: transparent;
+        .positionNumber{
+            width: 50px;
+            max-width: 50px;
+            height:100%;
+            background-color:#2A2A2A;
+            margin:0 1px 0 1px;
+            img{
+            width:60%;
+        }
+        }
+        img{
+            width:60%;
+        }
+    }
+`
+export const AnimatorBarContainer = styled.div`
+        width:90%;
         height:100%;
         background-color:#2A2A2A;
         margin:0 1px 0 1px;
         display:flex;
         justify-content:center;
-        align-items:center;        
+        align-items:center;  
         img{
             width:60%;
         }
-        &:nth-child(6) {
-            width:fit-content;
-            display:flex;
-            background-color:#000;     
-            margin-left: auto;  
-        }                   
-    }
+        .lastContainers{
+            width: 100%;
+            img{
+            width:60%;
+        }
+        }
 `
-
+export const PositionNumber = styled.div`
+            width: 50px;
+            max-width: 50px;
+            height:100%;
+            background-color:#2A2A2A;
+            margin:0 1px 0 1px;
+            img{
+            width:60%;
+        }
+        `
 export const Square = styled.div`
     width:100px;
     height:100px;

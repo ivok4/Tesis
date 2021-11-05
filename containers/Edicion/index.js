@@ -15,7 +15,8 @@ Square,
 Navbar,
 SectorNav,
 BallDot,
-BlueDot
+BlueDot,
+AnimatorBarContainer
 } from './styled'
 
 
@@ -254,36 +255,8 @@ createRectangulo = () => {
  drawRect(r1Info, r1Style);
 }
 
-
-// //get userId
-//    authListener = () =>{
-//     firebase.auth().onAuthStateChanged(user => {
-//       if(user){
-//         this.props.userId = user.uid;
-//       }
-//       else{
-//         setUser('');        
-//       }
-//     })
-//   }
-
- 
-//end get userID
+ //save info in database
  handleSaveClck = () => {
-  console.log(`este es el usuario id: ${this.props.userId}`);
-  // const savePlay = [
-  //   this.state.movimientos0,
-  //   this.state.movimientos1,
-  //   this.state.movimientos2,
-  //   this.state.movimientos3,
-  //   this.state.movimientos4,
-  //   this.state.movimientosB0,
-  //   this.state.movimientosB1,
-  //   this.state.movimientosB2,
-  //   this.state.movimientosB3,
-  //   this.state.movimientosB4,
-  //   this.state.movimientosBall
-  // ]
   const own = [
     this.state.movimientos0,
     this.state.movimientos1,
@@ -323,17 +296,14 @@ handlePositionClick = () =>{
   this.state.positions += 1;
   const self = this;
   let stateUpdates = {};
-  this.state.ownPlayers.forEach((player,i) => {
+  this.state.ownPlayers.forEach((player,i) => { 
     var player = document.getElementById(i);
     var style = window.getComputedStyle(player);
     var matrix = new WebKitCSSMatrix(style.transform);
     let posy = matrix.f;
     let posx = matrix.m41;
     stateUpdates = {posy,posx}
-    console.log('translateX: ', matrix.m41);
-    console.log('translateY: ', matrix.f);
     //guardar las posiciones en el state  
-    //self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
           switch (i) {
               case 0:
                 self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
@@ -362,10 +332,7 @@ handlePositionClick = () =>{
     let posy = matrix.f;
     let posx = matrix.m41;
     stateUpdates = {posy,posx}
-    console.log('translateX: ', matrix.m41);
-    console.log('translateY: ', matrix.f);
     //guardar las posiciones en el state  
-    //self.setState({movimientos0: [...self.state.movimientos0, stateUpdates]}); 
           switch (i) {
               case 0:
                 self.setState({movimientosB0: [...self.state.movimientosB0, stateUpdates]}); 
@@ -394,8 +361,6 @@ handlePositionClick = () =>{
     let posy = matrix.f;
     let posx = matrix.m41;
     stateUpdates = {posy,posx}
-    console.log('translateX: ', matrix.m41);
-    console.log('translateY: ', matrix.f);
           switch (i) {
               case 0:
                 self.setState({movimientosBall: [...self.state.movimientosBall, stateUpdates]}); 
@@ -404,12 +369,23 @@ handlePositionClick = () =>{
                   break;
           }  
   });
-  //console.log(this.state.movimientosBall);
-  //console.log(stateUpdates);
+  this.renderPositions();
+  }
+
+   renderPositions = () => {
+   // for(var x=1; x<this.state.positions; x++) {
+      var board = document.createElement('div');
+      board.classList.add("positionNumber"); 
+      board.innerHTML = `
+      <p>${this.state.positions}</p>
+      <img src="/Assets/AnimPos-icon.svg"/>  
+     `;
+      document.getElementById('positions-container').appendChild(board);
+    //}
   }
 
    render(){
-    const { ownPlayers, rivalPlayers, shapes, Ball} = this.state; 
+    const { ownPlayers, rivalPlayers, shapes, Ball, positions} = this.state; 
     const jugada = this.props.jugada;
     //console.log(jugada);
     return(
@@ -518,27 +494,22 @@ handlePositionClick = () =>{
           <div></div>
           <AnimatorBar>
             <p>Controles</p>
-            <div
+            <AnimatorBarContainer
             onClick={this.play}
             >
               <img src="/Assets/Play-icon.svg" />
-            </div>
-            <div>
+            </AnimatorBarContainer>
+            <AnimatorBarContainer>
               <p>2X</p>
-            </div>
-            <div>
+            </AnimatorBarContainer>
+            <AnimatorBarContainer>
               <img src="/Assets/FullScreen-icon.svg"/>
-            </div>
-            <div>
-              {/*<p>1</p>
-               <img src="/Assets/AnimPos-icon.svg"/> 
-               {positions.map((Widget, i) => <p>1</p>)} */}
-              <p>1</p>)
-            </div>
-            <div>
+            </AnimatorBarContainer>
+            <AnimatorBarContainer id="positions-container"></AnimatorBarContainer>
+            <div className="lastContainers"> 
               <p>Agregar posicion de la animación -- </p>
             </div>
-            <div               
+            <div className="lastContainers"               
             onClick={this.handlePositionClick} >
               <img src="/Assets/AddPos-icon.svg"/>
             </div>
