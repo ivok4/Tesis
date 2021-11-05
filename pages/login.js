@@ -14,7 +14,7 @@ export default function Login() {
   const [passwordError, setPasswordError] = useState('');
   const [hasAccount, setHasAccount ] = useState(true);
   const  userInfo  = useAppContext();
-  console.log(userInfo);
+  //console.log(userInfo);
 
 const clearInputs = () =>{
   setEmail('');
@@ -69,7 +69,7 @@ const clearErrors = () =>{
   
   return (
     <>
-       {userInfo.userActive ? (
+       {iuser ? (
         <Layout handleLogout={handleLogout}>
           <Grilla />
         </Layout>

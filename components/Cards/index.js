@@ -8,7 +8,8 @@ const Cards = () =>{
   const [proyects, setProyects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const  userInfo  = useAppContext();
-
+  console.log("userInfo");
+console.log(userInfo);
 
   //------------ GET USERS PLAYS FROM DATABASE -------------
   useEffect(() => {
@@ -18,7 +19,6 @@ const Cards = () =>{
               var username = (snapshot.val())|| 'Anonymous';               
               setProyects(username);
               setIsLoading(false);
-              //console.log(username);
             }); 
             
         } catch (error) {
@@ -40,6 +40,8 @@ const handleClick = value => () => {
   //------------ END GET USERS PLAYS FROM DATABASE -------------
   //color de fondo de la imagen de la pelota
   //#54D7AB
+  console.log("proyects");
+  console.log(proyects.plays);
 
     return( <>
         

@@ -24,6 +24,7 @@ const Grilla = () => {
   const [fileSize, setFileSize] = useState(0);
   const  userInfo  = useAppContext();
   //console.log(userInfo);
+  var userId = firebase.auth().currentUser.uid;
 
 
 //HANDLE INPUTS DATA
@@ -57,7 +58,7 @@ const handleChangeGoals = (value) =>{
 useEffect(() => {
       const fetchData = async () => {
           try {
-              const { data } = await firebase.database().ref('/users/0/' + userInfo.id).once('value').then((snapshot) => {
+              const { data } = await firebase.database().ref('/users/0/' + userId).once('value').then((snapshot) => {
                 var username = (snapshot.val())|| 'Anonymous';               
                 setProyects(username);
                 setIsLoading(false);
@@ -69,8 +70,25 @@ useEffect(() => {
       };
       fetchData();
   }, []);
-//--------END PLAYS FROM DATA BASE-----------
 
+
+// useEffect(() => {
+//   const fetchData = async () => {
+//       try {
+//           const { data } = await firebase.database().ref('/users/0/' + userId).once('value').then((snapshot) => {
+//             var username = (snapshot.val())|| 'Anonymous';   
+//             setProyects(username);
+//             setIsLoading(false);
+//           }); 
+          
+//       } catch (error) {
+//           console.error("este es mi error", error);
+//       }
+//   };
+//   fetchData();
+// }, []);
+//--------END PLAYS FROM DATA BASE-----------
+//console.log(proyects);
 
 //function to save file
 function uploadFile(){
